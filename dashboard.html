@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CLC store performance and inventory dashboard.">
+    <title>Dashboard | CLC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="dashboard-page">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar">
+            <a href="index.html" class="dashboard-logo" aria-label="CLC home">CLC</a>
+            <nav class="dashboard-navigation" aria-label="Dashboard navigation">
+                <p class="sidebar-label">Menu</p>
+                <a href="dashboard.html" class="sidebar-link active" aria-current="page">Dashboard</a>
+                <a href="index.html#best-sellers" class="sidebar-link">Products</a>
+                <a href="index.html#best-sellers" class="sidebar-link">Add Products</a>
+                <p class="sidebar-label history-label">History</p>
+                <a href="#daily-performance" class="sidebar-link">Sales History</a>
+                <a href="#inventory-chart" class="sidebar-link">Inventory Logs</a>
+                <a href="#activity" class="sidebar-link">Log History</a>
+            </nav>
+        </aside>
+
+        <div class="dashboard-workspace">
+            <header class="dashboard-header">
+                <h1>Dashboard</h1>
+                <div class="nav-icons">
+                    <div class="account-menu-wrapper">
+                        <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true"
+                            aria-expanded="false" aria-controls="account-menu">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="8" r="3.5"></circle>
+                                <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                            </svg>
+                        </button>
+                        <div class="account-menu" id="account-menu" role="menu" aria-label="Account options" hidden>
+                            <p class="account-menu-heading" role="presentation">YOUR ACCOUNT</p>
+                            <a href="account.html" role="menuitem">Account</a>
+                            <a href="settings.html" role="menuitem">Settings</a>
+                            <button type="button" role="menuitem">Help</button>
+                            <hr role="separator">
+                            <button type="button" role="menuitem">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-main" id="dashboard">
+                <div class="dashboard-primary">
+                    <section class="summary-metrics" aria-label="Inventory summary">
+                        <article class="summary-card">
+                            <svg viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9 10h14l2 18H7l2-18Z"></path>
+                                <path d="M12 12V8a4 4 0 0 1 8 0v4"></path>
+                            </svg>
+                            <div><strong>0</strong><span>Total products</span></div>
+                        </article>
+                        <article class="summary-card">
+                            <svg viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="m16 3 13 7-13 7L3 10l13-7Z"></path>
+                                <path d="M3 10v15l13 6 13-6V10M16 17v14M10 6l13 7"></path>
+                            </svg>
+                            <div><strong>0</strong><span>Total units</span></div>
+                        </article>
+                        <article class="summary-card">
+                            <svg viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="m3 7 11 11 6-5 9 10"></path>
+                                <path d="M22 23h7v-7"></path>
+                            </svg>
+                            <div><strong>0</strong><span>Low on stock</span></div>
+                        </article>
+                        <article class="summary-card">
+                            <svg viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M16 3 30 28H2L16 3Z"></path>
+                                <path d="M16 11v8m0 4h.01"></path>
+                            </svg>
+                            <div><strong>0</strong><span>Out of stock</span></div>
+                        </article>
+                    </section>
+
+                    <section class="performance-panel" id="daily-performance" aria-labelledby="performance-title">
+                        <h2 id="performance-title">Daily performance</h2>
+                        <div class="performance-metrics">
+                            <article class="performance-card"><span>Daily revenue</span><strong>$0.00</strong></article>
+                            <article class="performance-card"><span>Daily COGS</span><strong>$0.00</strong></article>
+                            <article class="performance-card"><span>Daily purchases</span><strong>$0.00</strong></article>
+                            <article class="performance-card"><span>Daily sales</span><strong>$0.00</strong></article>
+                        </div>
+                    </section>
+
+                    <section class="chart-panel" id="inventory-chart" aria-label="Revenue, net profit, and inventory purchases over time">
+                        <div class="chart-legend" aria-hidden="true">
+                            <span><i class="legend-revenue"></i>Revenue</span>
+                            <span><i class="legend-profit"></i>Net Profit</span>
+                            <span><i class="legend-purchases"></i>Inventory Purchases</span>
+                        </div>
+                        <svg class="performance-chart" viewBox="0 0 720 380" role="img"
+                            aria-labelledby="chart-title chart-description">
+                            <title id="chart-title">Store performance over time</title>
+                            <desc id="chart-description">A sample line chart of revenue, net profit, and inventory purchases from February through August 2026.</desc>
+                            <defs>
+                                <linearGradient id="revenue-fill" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0" stop-color="#4c67ff" stop-opacity=".42"></stop>
+                                    <stop offset="1" stop-color="#4c67ff" stop-opacity=".02"></stop>
+                                </linearGradient>
+                            </defs>
+                            <g class="chart-grid">
+                                <path d="M64 28H704M64 68H704M64 108H704M64 148H704M64 188H704M64 228H704M64 268H704M64 308H704"></path>
+                            </g>
+                            <g class="chart-y-labels">
+                                <text x="55" y="31">Php450k</text><text x="55" y="71">Php400k</text>
+                                <text x="55" y="111">Php350k</text><text x="55" y="151">Php300k</text>
+                                <text x="55" y="191">Php250k</text><text x="55" y="231">Php200k</text>
+                                <text x="55" y="271">Php100k</text><text x="55" y="311">Php0</text>
+                            </g>
+                            <path class="revenue-area" d="M64 278 C115 250 155 204 202 220 S250 283 304 278 S374 168 420 166 S480 280 530 302 S590 47 620 44 S678 180 704 292 L704 308H64Z"></path>
+                            <path class="chart-line revenue-line" d="M64 278 C115 250 155 204 202 220 S250 283 304 278 S374 168 420 166 S480 280 530 302 S590 47 620 44 S678 180 704 292"></path>
+                            <path class="chart-line profit-line" d="M64 296 C120 280 155 258 202 273 S260 304 304 296 S374 250 420 251 S482 292 530 304 S584 232 620 232 S675 282 704 302"></path>
+                            <path class="chart-line purchases-line" d="M64 308H704"></path>
+                            <g class="revenue-points"><circle cx="64" cy="278" r="3.5"></circle><circle cx="202" cy="220" r="3.5"></circle><circle cx="304" cy="278" r="3.5"></circle><circle cx="420" cy="166" r="3.5"></circle><circle cx="530" cy="302" r="3.5"></circle><circle cx="620" cy="44" r="3.5"></circle><circle cx="704" cy="292" r="3.5"></circle></g>
+                            <g class="profit-points"><circle cx="64" cy="296" r="3"></circle><circle cx="202" cy="273" r="3"></circle><circle cx="304" cy="296" r="3"></circle><circle cx="420" cy="251" r="3"></circle><circle cx="530" cy="304" r="3"></circle><circle cx="620" cy="232" r="3"></circle><circle cx="704" cy="302" r="3"></circle></g>
+                            <g class="purchase-points"><circle cx="64" cy="308" r="3"></circle><circle cx="202" cy="308" r="3"></circle><circle cx="304" cy="308" r="3"></circle><circle cx="420" cy="308" r="3"></circle><circle cx="530" cy="308" r="3"></circle><circle cx="620" cy="113" r="3"></circle><circle cx="704" cy="308" r="3"></circle></g>
+                            <g class="chart-x-labels">
+                                <text x="64" y="326">2026-02-24</text><text x="202" y="326">2026-04-05</text>
+                                <text x="304" y="326">2026-05-12</text><text x="420" y="326">2026-07-14</text>
+                                <text x="530" y="326">2026-07-23</text><text x="620" y="326">2026-07-26</text>
+                                <text x="704" y="326">2026-08-31</text>
+                            </g>
+                        </svg>
+                        <p class="chart-note">Sample performance data</p>
+                    </section>
+                </div>
+
+                <aside class="dashboard-secondary">
+                    <section class="side-panel activity-panel" id="activity" aria-labelledby="activity-title">
+                        <h2 id="activity-title">Alert &amp; activity</h2>
+                        <p class="empty-activity">No recent alerts or activity.</p>
+                    </section>
+                    <section class="side-panel top-products-panel" id="top-products" aria-labelledby="top-products-title">
+                        <h2 id="top-products-title">Top 5 selling products</h2>
+                        <ol class="top-products-list">
+                            <li><span aria-hidden="true">♛</span><p>One More Chance?</p></li>
+                            <li><span aria-hidden="true">♛</span><p>6PAX</p></li>
+                            <li><span aria-hidden="true">♛</span><p>Versace on the Floor</p></li>
+                            <li><span aria-hidden="true">♛</span><p>Paolo Pasqual</p></li>
+                            <li><span aria-hidden="true">♛</span><p>Always Right</p></li>
+                        </ol>
+                    </section>
+                </aside>
+            </main>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
