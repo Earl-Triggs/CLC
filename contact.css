@@ -77,7 +77,8 @@
     width: min(100%, 480px);
     aspect-ratio: 24 / 19;
     justify-self: center;
-    background: center / contain no-repeat url("contact-image.png");
+    /* Add contact-image.png beside contact.html, then enable:
+       background: center / contain no-repeat url("contact-image.png"); */
 }
 
 .contact-page footer {
