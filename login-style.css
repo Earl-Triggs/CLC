@@ -902,10 +902,11 @@ body.faq-body {
 /* Top Help Navbar */
 .help-navbar {
   background-color: var(--color-primary);
-  height: 52px;
+  height: 68px;
   display: flex;
   align-items: center;
   padding: 0 24px;
+  flex-shrink: 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -917,8 +918,8 @@ body.faq-body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1080px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
 }
 
 .navbar-left {
@@ -943,8 +944,8 @@ body.faq-body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
@@ -1010,8 +1011,8 @@ body.faq-body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   padding: 6px;
   border: 0;
   border-radius: 50%;
@@ -1032,8 +1033,8 @@ body.faq-body {
 }
 
 .help-navbar #account-btn svg {
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 30px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
