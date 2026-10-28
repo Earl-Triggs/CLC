@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage your CLC account settings and preferences.">
+    <title>Account Settings | CLC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="account.css">
+    <link rel="stylesheet" href="settings.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="account-page settings-page">
+    <div class="site-container">
+        <header class="navbar account-navbar settings-navbar">
+            <a href="index.html" class="logo" aria-label="CLC home">CLC</a>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+            </nav>
+            <h1>Account Settings</h1>
+            <a class="account-header-icon" href="account.html" aria-label="Your account">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="8" r="3.5"></circle>
+                    <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                </svg>
+            </a>
+        </header>
+
+        <main class="account-main settings-main">
+            <section class="settings-card" aria-labelledby="settings-title">
+                <header class="settings-intro">
+                    <h2 id="settings-title">Settings</h2>
+                    <p>Manage your account settings and preferences</p>
+                </header>
+
+                <section class="settings-panel personal-settings" aria-labelledby="personal-title">
+                    <h3 id="personal-title">Personal details</h3>
+                    <div class="personal-fields">
+                        <label class="settings-field">
+                            <span>Phone</span>
+                            <span class="input-with-icon"><span aria-hidden="true">♧</span><input type="tel" value="091234567" aria-label="Phone"></span>
+                        </label>
+                        <label class="settings-field">
+                            <span>Date Joined</span>
+                            <span class="input-with-icon"><span aria-hidden="true">◷</span><input type="text" value="1/1/2019" aria-label="Date joined" readonly></span>
+                        </label>
+                        <label class="settings-field address-field">
+                            <span>Address</span>
+                            <span class="input-with-icon"><span aria-hidden="true">⌖</span><textarea aria-label="Address" rows="3">1234 Maplewood Lane, Apt 5B, Springfield, IL 62704, United States</textarea></span>
+                        </label>
+                        <label class="settings-field">
+                            <span>Email address</span>
+                            <span class="input-with-icon"><span aria-hidden="true">✉</span><input type="email" value="account@email.com" aria-label="Email address"></span>
+                        </label>
+                        <label class="settings-field">
+                            <span>Timezone</span>
+                            <span class="input-with-icon"><span aria-hidden="true">◷</span><input type="text" value="Land" aria-label="Timezone"></span>
+                        </label>
+                        <label class="settings-field">
+                            <span>Region</span>
+                            <span class="input-with-icon"><span aria-hidden="true">◎</span><input type="text" value="Earth" aria-label="Region"></span>
+                        </label>
+                        <label class="settings-field">
+                            <span>Account ID</span>
+                            <span class="input-with-icon"><span aria-hidden="true">♙</span><input type="text" value="123456789" aria-label="Account ID" readonly></span>
+                        </label>
+                        <label class="settings-field">
+                            <span>Full Name</span>
+                            <span class="input-with-icon"><span aria-hidden="true">♙</span><input type="text" value="Account Full Name" aria-label="Full name"></span>
+                        </label>
+                        <label class="settings-field">
+                            <span>Birthday</span>
+                            <span class="input-with-icon"><span aria-hidden="true">◷</span><input type="text" value="01/01/1987" aria-label="Birthday"></span>
+                        </label>
+                        <label class="settings-field">
+                            <span>Gender</span>
+                            <span class="input-with-icon"><span aria-hidden="true">♙</span><input type="text" value="Non-Binary" aria-label="Gender"></span>
+                        </label>
+                        <label class="settings-field">
+                            <span>Nationality</span>
+                            <span class="input-with-icon"><span aria-hidden="true">♙</span><input type="text" value="Computer Citizen" aria-label="Nationality"></span>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="settings-panel preferences-settings" aria-label="Other settings">
+                    <h3 class="settings-group-heading">Other Settings</h3>
+                    <h4 class="settings-section-heading">Order Settings</h4>
+                    <div class="preference-list">
+                        <label class="preference-row">Automatic Reordering/ Subscriptions:<input type="checkbox" checked></label>
+                        <label class="preference-row">One-Click Instant Checkout:<input type="checkbox" checked></label>
+                        <label class="preference-row">Require Signature on Delivery:<input type="checkbox" checked></label>
+                        <label class="preference-row">Allow Substitute items for out of stock:<input type="checkbox" checked></label>
+                    </div>
+                    <h4 class="settings-section-heading">Privacy Settings</h4>
+                    <div class="preference-list">
+                        <label class="preference-row">Personalized Product Recommendations:<input type="checkbox" checked></label>
+                        <label class="preference-row">Ad &amp; Marketing Analytics Tracking:<input type="checkbox" checked></label>
+                        <label class="preference-row">Post Products Reviews Anonymously:<input type="checkbox" checked></label>
+                        <label class="preference-row">Share Activity with Social Accounts:<input type="checkbox" checked></label>
+                        <label class="preference-row">Non-Essential Cookies:<input type="checkbox" checked></label>
+                    </div>
+                    <h4 class="settings-section-heading">Language</h4>
+                    <div class="preference-list">
+                        <label class="preference-row">Auto-Detect Language by Location:<input type="checkbox" checked></label>
+                        <label class="preference-row">Auto-Translate Language:<input type="checkbox" checked></label>
+                        <label class="preference-row">Auto-Convert Prices to Local Currency:<input type="checkbox" checked></label>
+                        <label class="preference-row">Use Metric System (cm / kg):<input type="checkbox" checked></label>
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <footer class="account-footer">
+            <p>© 2026 CLC. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
