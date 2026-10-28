@@ -228,33 +228,55 @@ const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-btn");
 
 if (searchButton && searchBox && searchInput) {
+    let searchIdleTimeout;
+
+    const closeSearch = () => {
+        clearTimeout(searchIdleTimeout);
+        searchBox.classList.remove("is-open");
+        searchButton.setAttribute("aria-expanded", "false");
+        searchButton.setAttribute("aria-label", "Open search");
+        searchInput.blur();
+    };
+
+    const resetSearchIdleTimeout = () => {
+        clearTimeout(searchIdleTimeout);
+        if (searchBox.classList.contains("is-open")) {
+            searchIdleTimeout = setTimeout(closeSearch, 10000);
+        }
+    };
+
     searchButton.addEventListener("click", () => {
         if (!searchBox.classList.contains("is-open")) {
             searchBox.classList.add("is-open");
             searchButton.setAttribute("aria-expanded", "true");
             searchButton.setAttribute("aria-label", "Search");
             searchInput.focus();
+            resetSearchIdleTimeout();
             return;
         }
 
         filterProducts();
+        resetSearchIdleTimeout();
+    });
+
+    searchBox.addEventListener("pointerdown", resetSearchIdleTimeout);
+    searchInput.addEventListener("input", () => {
+        filterProducts();
+        resetSearchIdleTimeout();
+    });
+
+    searchInput.addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+            filterProducts();
+        } else if (event.key === "Escape") {
+            closeSearch();
+            searchButton.focus();
+            return;
+        }
+
+        resetSearchIdleTimeout();
     });
 }
-
-// SEARCH WHILE TYPING
-searchInput?.addEventListener("input", filterProducts);
-
-// PRESS ENTER TO SEARCH
-searchInput?.addEventListener("keydown", event => {
-    if (event.key === "Enter") {
-        filterProducts();
-    } else if (event.key === "Escape" && searchBox && searchButton) {
-        searchBox.classList.remove("is-open");
-        searchButton.setAttribute("aria-expanded", "false");
-        searchButton.setAttribute("aria-label", "Open search");
-        searchButton.focus();
-    }
-});
 
 // CART DRAWER
 cartButton?.addEventListener("click", () => setCartOpen(true));

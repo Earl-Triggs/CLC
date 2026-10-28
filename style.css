@@ -369,12 +369,15 @@ body.cart-open {
     width: 44px;
     margin-left: auto;
     overflow: hidden;
-    transition: width 0.2s ease, flex-basis 0.2s ease;
+    transition:
+        width 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+        flex-basis 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+        background-color 0.2s ease;
 }
 
 .search-box.is-open {
-    flex: 0 1 280px;
-    width: 280px;
+    flex: 0 1 380px;
+    width: 380px;
     background: #fff;
 }
 
@@ -391,13 +394,17 @@ body.cart-open {
     color: #333;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.15s ease, padding 0.2s ease;
+    transition:
+        opacity 0.16s ease,
+        padding 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+        visibility 0s linear 0.28s;
 }
 
 .search-box.is-open input {
     padding: 0 15px;
     opacity: 1;
     visibility: visible;
+    transition-delay: 0s, 0s, 0s;
 }
 
 .search-box input::placeholder {
@@ -414,10 +421,15 @@ body.cart-open {
     flex: 0 0 44px;
     border: none;
     background: transparent;
-    color: #333;
+    color: white;
     display: grid;
     place-items: center;
     cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.search-box.is-open button {
+    color: #333;
 }
 
 .search-box.is-open button:hover {
