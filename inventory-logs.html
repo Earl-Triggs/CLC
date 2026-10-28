@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Review CLC product inventory activity and stock changes.">
+    <title>Inventory Logs | CLC Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="sales-history.css">
+    <link rel="stylesheet" href="inventory-logs.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="dashboard-page inventory-logs-page">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar">
+            <a href="index.html" class="dashboard-logo" aria-label="CLC home">CLC</a>
+            <nav class="dashboard-navigation" aria-label="Dashboard navigation">
+                <p class="sidebar-label">Menu</p>
+                <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+                <a href="admin-products.html" class="sidebar-link">Products</a>
+                <a href="admin-add-product.html" class="sidebar-link">Add Products</a>
+                <p class="sidebar-label history-label">History</p>
+                <a href="sales-history.html" class="sidebar-link">Sales History</a>
+                <a href="inventory-logs.html" class="sidebar-link active" aria-current="page">Inventory Logs</a>
+                <a href="dashboard.html#activity" class="sidebar-link">Log History</a>
+            </nav>
+        </aside>
+
+        <div class="dashboard-workspace">
+            <header class="dashboard-header">
+                <h1>Inventory Logs</h1>
+                <div class="nav-icons">
+                    <div class="account-menu-wrapper">
+                        <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true"
+                            aria-expanded="false" aria-controls="account-menu">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="8" r="3.5"></circle>
+                                <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                            </svg>
+                        </button>
+                        <div class="account-menu" id="account-menu" role="menu" aria-label="Account options" hidden>
+                            <p class="account-menu-heading" role="presentation">YOUR ACCOUNT</p>
+                            <a href="account.html" role="menuitem">Account</a>
+                            <a href="settings.html" role="menuitem">Settings</a>
+                            <button type="button" role="menuitem">Help</button>
+                            <hr role="separator">
+                            <button type="button" role="menuitem">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="sales-main inventory-main">
+                <section class="sales-summary inventory-summary" aria-label="Inventory log totals">
+                    <article><h2>Total Logs</h2><p id="total-logs">0</p></article>
+                    <article><h2>Products Added</h2><p id="products-added">0</p></article>
+                    <article><h2>Total Items Sold</h2><p id="inventory-items-sold">0</p></article>
+                </section>
+
+                <section class="sales-controls inventory-controls" aria-label="Filter inventory logs">
+                    <label class="sales-search-label">
+                        <span class="visually-hidden">Search inventory logs</span>
+                        <input id="inventory-search" type="search" placeholder="Search log ID, items,...">
+                    </label>
+                    <label>
+                        <span class="visually-hidden">Filter by action</span>
+                        <select id="inventory-action-filter">
+                            <option value="all">All Actions</option>
+                            <option value="Added">Added</option>
+                            <option value="Edited">Edited</option>
+                            <option value="Restocked">Restocked</option>
+                            <option value="Sold">Sold</option>
+                            <option value="Returned">Returned</option>
+                        </select>
+                    </label>
+                    <label>
+                        <span class="visually-hidden">Sort by log date</span>
+                        <select id="inventory-date-sort">
+                            <option value="desc">Newest to Oldest</option>
+                            <option value="asc">Oldest to Newest</option>
+                        </select>
+                    </label>
+                    <label>
+                        <span class="visually-hidden">Sort by stock quantity</span>
+                        <select id="inventory-stock-sort">
+                            <option value="desc">Highest Stock</option>
+                            <option value="asc">Lowest Stock</option>
+                        </select>
+                    </label>
+                </section>
+
+                <div class="sales-table-frame">
+                    <div class="sales-table-scroll inventory-table-scroll" tabindex="0" aria-label="Scrollable inventory logs">
+                        <table class="sales-table inventory-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Log ID</th>
+                                    <th scope="col">Item</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Total Amount (stocks)</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventory-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="sales-empty" id="inventory-empty" hidden>No inventory logs match your search and filters.</p>
+            </main>
+        </div>
+    </div>
+
+    <dialog class="sale-details-dialog inventory-details-dialog" id="inventory-details-dialog"
+        aria-labelledby="inventory-details-title">
+        <div class="sale-dialog-header">
+            <h2 id="inventory-details-title">Inventory log</h2>
+            <button type="button" id="inventory-dialog-close" aria-label="Close inventory log details">&times;</button>
+        </div>
+        <dl id="inventory-details-content"></dl>
+    </dialog>
+
+    <script src="script.js"></script>
+    <script src="admin-inventory-data.js"></script>
+    <script src="inventory-logs.js"></script>
+</body>
+
+</html>

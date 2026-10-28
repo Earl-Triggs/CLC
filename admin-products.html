@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage CLC perfume products and inventory.">
+    <title>Products | CLC Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="admin-products.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="dashboard-page product-admin-page">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar">
+            <a href="index.html" class="dashboard-logo" aria-label="CLC home">CLC</a>
+            <nav class="dashboard-navigation" aria-label="Dashboard navigation">
+                <p class="sidebar-label">Menu</p>
+                <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+                <a href="admin-products.html" class="sidebar-link active" aria-current="page">Products</a>
+                <a href="admin-add-product.html" class="sidebar-link">Add Products</a>
+                <p class="sidebar-label history-label">History</p>
+                <a href="sales-history.html" class="sidebar-link">Sales History</a>
+                <a href="inventory-logs.html" class="sidebar-link">Inventory Logs</a>
+                <a href="dashboard.html#activity" class="sidebar-link">Log History</a>
+            </nav>
+        </aside>
+
+        <div class="dashboard-workspace">
+            <header class="dashboard-header">
+                <h1>Products</h1>
+                <div class="nav-icons">
+                    <div class="account-menu-wrapper">
+                        <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true"
+                            aria-expanded="false" aria-controls="account-menu">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="8" r="3.5"></circle>
+                                <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                            </svg>
+                        </button>
+                        <div class="account-menu" id="account-menu" role="menu" aria-label="Account options" hidden>
+                            <p class="account-menu-heading" role="presentation">YOUR ACCOUNT</p>
+                            <a href="account.html" role="menuitem">Account</a>
+                            <a href="settings.html" role="menuitem">Settings</a>
+                            <button type="button" role="menuitem">Help</button>
+                            <hr role="separator">
+                            <button type="button" role="menuitem">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="product-admin-main">
+                <section class="product-filters" aria-label="Filter products">
+                    <label class="product-search">
+                        <span>Search</span>
+                        <input id="product-search" type="search" autocomplete="off">
+                    </label>
+                    <label>
+                        <span>Category:</span>
+                        <select id="category-filter">
+                            <option value="all">All</option>
+                            <option value="Kids">Kids</option>
+                            <option value="Men">Men</option>
+                            <option value="Women" selected>Women</option>
+                            <option value="Unisex">Unisex</option>
+                        </select>
+                    </label>
+                    <label>
+                        <span>Sort by Stock:</span>
+                        <select id="stock-sort">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </label>
+                    <label>
+                        <span>Sort by Price:</span>
+                        <select id="price-sort">
+                            <option value="none">Default</option>
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </label>
+                </section>
+
+                <section class="admin-product-grid" id="admin-product-grid" aria-label="Products"></section>
+                <p class="admin-no-results" id="admin-no-results" hidden>No products match these filters.</p>
+            </main>
+        </div>
+    </div>
+
+    <dialog class="product-editor" id="product-editor" aria-labelledby="product-editor-title">
+        <form id="product-form">
+            <div class="product-editor-heading">
+                <h2 id="product-editor-title">Edit product</h2>
+                <button type="button" class="editor-close" id="editor-close" aria-label="Close">&times;</button>
+            </div>
+            <label>Product name<input name="name" required maxlength="80"></label>
+            <label>Price<input name="price" type="number" min="0" step="0.01" required></label>
+            <label>Retail selling price<input name="retailPrice" type="number" min="0" step="0.01" required></label>
+            <label>Category
+                <select name="category" required>
+                    <option>Kids</option><option>Men</option><option>Women</option><option>Unisex</option>
+                </select>
+            </label>
+            <label>Stock<input name="stock" type="number" min="0" step="1" required></label>
+            <label>Image URL<input name="image" type="url" required></label>
+            <p class="editor-error" id="editor-error" role="alert" hidden></p>
+            <div class="editor-actions">
+                <button type="button" class="editor-cancel" id="editor-cancel">Cancel</button>
+                <button type="submit" class="editor-save">Save product</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="script.js"></script>
+    <script src="admin-inventory-data.js"></script>
+    <script src="admin-product-data.js"></script>
+    <script src="admin-products.js"></script>
+</body>
+
+</html>

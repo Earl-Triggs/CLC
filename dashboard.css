@@ -1,0 +1,510 @@
+.dashboard-page {
+    min-height: 100vh;
+    color: #111;
+    font-family: Arial, sans-serif;
+}
+
+.dashboard-shell {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 21.1% minmax(0, 1fr);
+}
+
+.dashboard-sidebar {
+    min-width: 0;
+    background: #a780ac;
+    color: #fff;
+}
+
+.dashboard-logo {
+    display: grid;
+    width: 64px;
+    height: 64px;
+    margin: 4px 0 20px 2px;
+    border: 2px solid #eee1ef;
+    border-radius: 50%;
+    background: #f4e8f5;
+    color: #513d55;
+    font-family: "Playfair Display", serif;
+    font-size: 23px;
+    font-weight: 700;
+    place-items: center;
+}
+
+.dashboard-navigation {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px 22px 34px;
+}
+
+.sidebar-label {
+    margin: 5px 0 7px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+}
+
+.history-label {
+    margin-top: 20px;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 6px 10px 6px 20px;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.sidebar-link:hover,
+.sidebar-link:focus-visible,
+.sidebar-link.active {
+    background: rgba(91, 64, 98, 0.28);
+    color: #fff;
+    outline: none;
+}
+
+.dashboard-workspace {
+    min-width: 0;
+    background: #fff;
+}
+
+.dashboard-header {
+    display: flex;
+    min-height: 74px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px 0 16px;
+    background: #795b7e;
+    color: white;
+}
+
+.dashboard-header h1 {
+    font-size: 27px;
+    font-weight: 600;
+}
+
+.dashboard-header .nav-icons {
+    margin-left: auto;
+}
+
+.dashboard-header .nav-icons #account-btn {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border-radius: 50%;
+}
+
+.dashboard-header #account-btn:hover,
+.dashboard-header #account-btn[aria-expanded="true"] {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.dashboard-header #account-btn svg {
+    width: 30px;
+    height: 30px;
+}
+
+.dashboard-main {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(235px, 1fr);
+    align-items: start;
+    gap: 20px;
+    padding: 11px 26px 24px 40px;
+}
+
+.dashboard-primary,
+.dashboard-secondary {
+    min-width: 0;
+}
+
+.summary-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.summary-card {
+    display: flex;
+    min-height: 50px;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 8px;
+    border-radius: 16px;
+    background: #dedede;
+}
+
+.summary-card svg {
+    width: 31px;
+    height: 31px;
+    flex: 0 0 31px;
+    fill: none;
+    stroke: #111;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+}
+
+.summary-card div {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.summary-card strong {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.summary-card span {
+    overflow: hidden;
+    font-size: 9px;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.performance-panel {
+    margin-top: 9px;
+    padding: 10px 17px 12px;
+    border-radius: 16px;
+    background: #dedede;
+}
+
+.performance-panel h2,
+.side-panel h2 {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.performance-panel h2 {
+    margin-bottom: 2px;
+}
+
+.performance-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.performance-card {
+    display: flex;
+    min-height: 76px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 10px;
+    border-radius: 15px;
+    background: white;
+}
+
+.performance-card span {
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.performance-card strong {
+    font-size: clamp(20px, 2.2vw, 29px);
+    line-height: 1.25;
+}
+
+.chart-panel {
+    margin-top: 62px;
+    padding: 0 0 12px;
+}
+
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    color: #555;
+    font-size: 9px;
+}
+
+.chart-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.chart-legend i {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 2px solid currentColor;
+}
+
+.legend-revenue {
+    color: #4c67ff;
+    background: #4c67ff;
+}
+
+.legend-profit {
+    color: #00bf8a;
+    background: #00bf8a;
+}
+
+.legend-purchases {
+    color: #f39a17;
+}
+
+.performance-chart {
+    display: block;
+    width: 100%;
+    overflow: visible;
+}
+
+.chart-grid path {
+    fill: none;
+    stroke: #c8d3e2;
+    stroke-width: 1;
+}
+
+.chart-y-labels,
+.chart-x-labels {
+    fill: #718198;
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+}
+
+.chart-y-labels text {
+    text-anchor: end;
+}
+
+.chart-x-labels text {
+    text-anchor: middle;
+}
+
+.revenue-area {
+    fill: url(#revenue-fill);
+}
+
+.chart-line {
+    fill: none;
+    stroke-width: 2;
+}
+
+.revenue-line {
+    fill: none;
+    stroke: #4c67ff;
+}
+
+.revenue-points {
+    fill: #4c67ff;
+    stroke: #4c67ff;
+}
+
+.profit-line {
+    fill: none;
+    stroke: #00bf8a;
+}
+
+.profit-points {
+    fill: #00bf8a;
+    stroke: #00bf8a;
+}
+
+.purchases-line {
+    fill: none;
+    stroke: #f39a17;
+}
+
+.purchase-points {
+    fill: #f39a17;
+    stroke: #f39a17;
+}
+
+.chart-note {
+    margin-top: -6px;
+    color: #858585;
+    font-size: 9px;
+    text-align: center;
+}
+
+.dashboard-secondary {
+    display: grid;
+    gap: 9px;
+}
+
+.side-panel {
+    padding: 10px 21px;
+    border-radius: 16px;
+    background: #dedede;
+}
+
+.side-panel h2 {
+    font-size: 14px;
+}
+
+.activity-panel {
+    min-height: 179px;
+}
+
+.empty-activity {
+    margin-top: 18px;
+    color: #777;
+    font-size: 12px;
+}
+
+.top-products-panel {
+    min-height: 472px;
+    padding-top: 11px;
+}
+
+.top-products-list {
+    display: grid;
+    gap: 10px;
+    padding: 13px 0 0;
+    list-style: none;
+}
+
+.top-products-list li {
+    display: flex;
+    min-height: 57px;
+    align-items: center;
+    gap: 8px;
+}
+
+.top-products-list li > span {
+    color: #c98d08;
+    font-family: Georgia, serif;
+    font-size: 32px;
+    line-height: 1;
+    text-shadow: 0 1px #fff0b0;
+}
+
+.top-products-list p {
+    font-size: 11px;
+}
+
+@media (max-width: 1050px) {
+    .dashboard-shell {
+        grid-template-columns: 190px minmax(0, 1fr);
+    }
+
+    .dashboard-main {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 14px 18px 22px;
+    }
+
+    .dashboard-secondary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .activity-panel,
+    .top-products-panel {
+        min-height: 0;
+    }
+
+    .top-products-list {
+        gap: 0;
+    }
+
+    .top-products-list li {
+        min-height: 40px;
+    }
+
+    .chart-panel {
+        margin-top: 36px;
+    }
+}
+
+@media (max-width: 650px) {
+    .dashboard-shell {
+        grid-template-columns: minmax(0, 1fr);
+        align-content: start;
+    }
+
+    .dashboard-sidebar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 6px 12px;
+    }
+
+    .dashboard-logo {
+        width: 44px;
+        height: 44px;
+        flex: 0 0 44px;
+        margin: 0;
+        font-size: 17px;
+    }
+
+    .dashboard-navigation {
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+        overflow-x: auto;
+        padding: 0;
+    }
+
+    .dashboard-navigation .sidebar-label {
+        display: none;
+    }
+
+    .sidebar-link {
+        flex: 0 0 auto;
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .dashboard-header {
+        min-height: 60px;
+        padding: 0 14px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 22px;
+    }
+
+    .dashboard-main {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .summary-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .summary-card {
+        min-height: 52px;
+    }
+
+    .performance-panel {
+        padding: 11px;
+    }
+
+    .performance-panel h2 {
+        font-size: 14px;
+    }
+
+    .performance-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .performance-card {
+        min-height: 65px;
+    }
+
+    .chart-panel {
+        margin-top: 28px;
+    }
+
+    .chart-legend {
+        flex-wrap: wrap;
+        gap: 6px;
+        font-size: 8px;
+    }
+
+    .chart-legend i {
+        width: 8px;
+        height: 8px;
+    }
+
+    .dashboard-secondary {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

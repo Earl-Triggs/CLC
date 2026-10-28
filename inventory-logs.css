@@ -1,0 +1,55 @@
+.inventory-logs-page .dashboard-shell {
+    min-height: 100vh;
+}
+
+.inventory-summary p {
+    font-size: 23px;
+}
+
+.inventory-table th:nth-child(1),
+.inventory-table td:nth-child(1) {
+    width: 18%;
+}
+
+.inventory-table th:nth-child(2),
+.inventory-table td:nth-child(2) {
+    width: 27%;
+}
+
+.inventory-table th:nth-child(3),
+.inventory-table td:nth-child(3) {
+    width: 16%;
+}
+
+.inventory-table th:nth-child(4),
+.inventory-table td:nth-child(4) {
+    width: 18%;
+}
+
+.inventory-table th:nth-child(5),
+.inventory-table td:nth-child(5) {
+    width: 18%;
+}
+
+.inventory-details-dialog {
+    position: fixed;
+    inset: 50% auto auto 50%;
+    width: min(440px, calc(100% - 28px));
+    max-height: calc(100vh - 28px);
+    overflow: auto;
+    padding: 20px;
+    border: 0;
+    border-radius: 15px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 650px) {
+    .inventory-table {
+        min-width: 610px;
+    }
+
+    .inventory-details-dialog dl {
+        grid-template-columns: 1fr 1fr;
+    }
+}
