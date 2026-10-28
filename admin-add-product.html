@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Add a perfume product to CLC inventory.">
+    <title>Add Product | CLC Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="admin-add-product.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="dashboard-page product-admin-page add-product-page">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar">
+            <a href="index.html" class="dashboard-logo" aria-label="CLC home">CLC</a>
+            <nav class="dashboard-navigation" aria-label="Dashboard navigation">
+                <p class="sidebar-label">Menu</p>
+                <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+                <a href="admin-products.html" class="sidebar-link">Products</a>
+                <a href="admin-add-product.html" class="sidebar-link active" aria-current="page">Add Products</a>
+                <p class="sidebar-label history-label">History</p>
+                <a href="dashboard.html#daily-performance" class="sidebar-link">Sales History</a>
+                <a href="dashboard.html#inventory-chart" class="sidebar-link">Inventory Logs</a>
+                <a href="dashboard.html#activity" class="sidebar-link">Log History</a>
+            </nav>
+        </aside>
+
+        <div class="dashboard-workspace">
+            <header class="dashboard-header">
+                <h1>Add Product</h1>
+                <div class="nav-icons">
+                    <div class="account-menu-wrapper">
+                        <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true"
+                            aria-expanded="false" aria-controls="account-menu">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="8" r="3.5"></circle>
+                                <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                            </svg>
+                        </button>
+                        <div class="account-menu" id="account-menu" role="menu" aria-label="Account options" hidden>
+                            <p class="account-menu-heading" role="presentation">YOUR ACCOUNT</p>
+                            <a href="account.html" role="menuitem">Account</a>
+                            <a href="settings.html" role="menuitem">Settings</a>
+                            <button type="button" role="menuitem">Help</button>
+                            <hr role="separator">
+                            <button type="button" role="menuitem">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="add-product-main">
+                <form id="add-product-form" novalidate>
+                    <section class="add-product-section basic-information">
+                        <h2>Basic Information</h2>
+                        <div class="add-product-fields basic-fields">
+                            <label>Product Name<input name="name" required maxlength="80"></label>
+                            <label>Category
+                                <select name="category" required>
+                                    <option value="" selected disabled>Select category</option>
+                                    <option>Kids</option><option>Men</option><option>Women</option><option>Unisex</option>
+                                </select>
+                            </label>
+                            <label>Barcode<input name="barcode" inputmode="numeric"></label>
+                        </div>
+                    </section>
+
+                    <section class="add-product-section product-details" aria-label="Additional product details">
+                        <div class="add-product-fields details-fields">
+                            <label>Brand<input name="brand"></label>
+                            <label>SKU<input name="sku"></label>
+                            <label>Supplier<input name="supplier"></label>
+                            <label>Size / Volume<input name="size"></label>
+                            <label>Fragrance Type<input name="fragrance"></label>
+                            <label>Reorder Level<input name="reorderLevel" type="number" min="0" step="1" value="0"></label>
+                        </div>
+                    </section>
+
+                    <section class="add-product-section pricing-stock">
+                        <h2>Pricing and Stock</h2>
+                        <div class="add-product-fields">
+                            <label>Price<input name="price" type="number" min="0" step="0.01" required></label>
+                            <label>Retail Selling Price<input name="retailPrice" type="number" min="0" step="0.01" required></label>
+                            <label>Initial Stock Quantity<input name="stock" type="number" min="0" step="1" required></label>
+                        </div>
+                    </section>
+
+                    <section class="add-product-section product-description">
+                        <label>Description<textarea name="description" rows="3"></textarea></label>
+                        <label class="product-image-label" for="product-image">Product Image</label>
+                        <input id="product-image" name="image" type="file" accept="image/*">
+                        <img id="image-preview" class="image-preview" alt="Selected product preview" hidden>
+                    </section>
+
+                    <p class="add-product-error" id="add-product-error" role="alert" hidden></p>
+                    <div class="add-product-actions">
+                        <button type="submit">Save Product</button>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="admin-product-data.js"></script>
+    <script src="admin-add-product.js"></script>
+</body>
+
+</html>
