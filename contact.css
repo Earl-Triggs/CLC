@@ -1,0 +1,116 @@
+.contact-main {
+    padding-top: 24px;
+}
+
+.contact-hero {
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    align-items: center;
+    min-height: min(68vh, 516px);
+    padding: 54px clamp(36px, 9.5vw, 142px);
+    background: #a780ac;
+    color: #fff;
+}
+
+.contact-copy {
+    max-width: 610px;
+}
+
+.contact-eyebrow,
+.contact-intro {
+    font-family: 'Courier New', monospace;
+    font-style: italic;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+}
+
+.contact-eyebrow {
+    margin-bottom: 20px;
+    font-size: clamp(14px, 1.3vw, 18px);
+}
+
+.contact-copy h1 {
+    margin-bottom: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: clamp(38px, 4vw, 54px);
+    font-style: italic;
+    line-height: 1.1;
+}
+
+.contact-intro {
+    max-width: 610px;
+    margin-bottom: 36px;
+    font-size: clamp(14px, 1.35vw, 18px);
+    line-height: 1.55;
+}
+
+.contact-details {
+    display: grid;
+    gap: 20px;
+    font-style: normal;
+}
+
+.contact-details p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+}
+
+.contact-details svg {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+    fill: none;
+    stroke: #462d49;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+}
+
+.contact-details a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.contact-illustration {
+    width: min(100%, 480px);
+    aspect-ratio: 24 / 19;
+    justify-self: center;
+    background: center / contain no-repeat url("contact-image.png");
+}
+
+.contact-page footer {
+    margin-top: 66px;
+    padding: 26px 14px;
+    font-size: 14px;
+}
+
+@media (max-width: 700px) {
+    .contact-main {
+        padding-top: 16px;
+    }
+
+    .contact-hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        min-height: 0;
+        padding: 42px 8vw;
+    }
+
+    .contact-copy {
+        max-width: none;
+    }
+
+    .contact-intro {
+        margin-bottom: 26px;
+    }
+
+    .contact-illustration {
+        width: min(75%, 360px);
+    }
+
+    .contact-page footer {
+        margin-top: 40px;
+    }
+}
