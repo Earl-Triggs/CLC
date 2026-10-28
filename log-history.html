@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Search and review CLC administrator login history.">
+    <title>Log History | CLC Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="sales-history.css">
+    <link rel="stylesheet" href="log-history.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="dashboard-page log-history-page">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar">
+            <a href="index.html" class="dashboard-logo" aria-label="CLC home">CLC</a>
+            <nav class="dashboard-navigation" aria-label="Dashboard navigation">
+                <p class="sidebar-label">Menu</p>
+                <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+                <a href="admin-products.html" class="sidebar-link">Products</a>
+                <a href="admin-add-product.html" class="sidebar-link">Add Products</a>
+                <p class="sidebar-label history-label">History</p>
+                <a href="sales-history.html" class="sidebar-link">Sales History</a>
+                <a href="inventory-logs.html" class="sidebar-link">Inventory Logs</a>
+                <a href="log-history.html" class="sidebar-link active" aria-current="page">Log History</a>
+            </nav>
+        </aside>
+
+        <div class="dashboard-workspace">
+            <header class="dashboard-header">
+                <h1>Log History</h1>
+                <div class="nav-icons">
+                    <div class="account-menu-wrapper">
+                        <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true"
+                            aria-expanded="false" aria-controls="account-menu">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="8" r="3.5"></circle>
+                                <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                            </svg>
+                        </button>
+                        <div class="account-menu" id="account-menu" role="menu" aria-label="Account options" hidden>
+                            <p class="account-menu-heading" role="presentation">YOUR ACCOUNT</p>
+                            <a href="account.html" role="menuitem">Account</a>
+                            <a href="settings.html" role="menuitem">Settings</a>
+                            <button type="button" role="menuitem">Help</button>
+                            <hr role="separator">
+                            <button type="button" role="menuitem">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="sales-main log-history-main">
+                <section class="sales-controls log-history-controls" aria-label="Filter login history">
+                    <label class="sales-search-label">
+                        <span class="visually-hidden">Search login history</span>
+                        <input id="login-search" type="search" placeholder="Search log ID, username,...">
+                    </label>
+                    <label>
+                        <span class="visually-hidden">Sort login time</span>
+                        <select id="login-time-sort">
+                            <option value="desc">Newest to Oldest</option>
+                            <option value="asc">Oldest to Newest</option>
+                        </select>
+                    </label>
+                    <label>
+                        <span class="visually-hidden">Sort usernames alphabetically</span>
+                        <select id="login-username-sort">
+                            <option value="asc">Alphabetical (A to Z)</option>
+                            <option value="desc">Alphabetical (Z to A)</option>
+                        </select>
+                    </label>
+                </section>
+
+                <div class="sales-table-frame">
+                    <div class="sales-table-scroll log-history-table-scroll" tabindex="0"
+                        aria-label="Scrollable login history">
+                        <table class="sales-table log-history-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Login Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="login-history-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="sales-empty" id="login-history-empty" hidden>No login history matches your search.</p>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="log-history.js"></script>
+</body>
+
+</html>
