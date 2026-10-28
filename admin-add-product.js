@@ -126,8 +126,9 @@
             return;
         }
 
+        let products;
         try {
-            const products = readProducts();
+            products = readProducts();
             products.push(product);
             localStorage.setItem(storageKey, JSON.stringify(products));
         } catch (error) {
@@ -135,6 +136,19 @@
             showError(error instanceof DOMException && error.name === "QuotaExceededError"
                 ? "There is not enough browser storage for this product image. Choose a smaller image."
                 : "The product could not be saved. Please try again.");
+            return;
+        }
+
+        try {
+            window.CLC_INVENTORY_LOGS.append({
+                item: product.name,
+                action: "Added",
+                quantity: product.stock,
+                details: `Product added to inventory${product.sku ? ` (SKU ${product.sku})` : ""}`
+            });
+        } catch (error) {
+            console.error("Product saved, but its inventory log could not be recorded.", error);
+            showError("Product saved, but its inventory log could not be recorded. Please check browser storage.");
             return;
         }
 

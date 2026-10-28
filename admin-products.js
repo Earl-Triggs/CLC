@@ -174,6 +174,19 @@
             return;
         }
 
+        try {
+            window.CLC_INVENTORY_LOGS.append({
+                item: product.name,
+                action: activeProductId ? "Edited" : "Added",
+                quantity: product.stock,
+                details: `Product ${activeProductId ? "updated" : "added"} in inventory`
+            });
+        } catch (error) {
+            console.error("Product saved, but its inventory log could not be recorded.", error);
+            showError("Product saved, but its inventory log could not be recorded. Please check browser storage.");
+            return;
+        }
+
         dialog.close();
         renderProducts();
     });
