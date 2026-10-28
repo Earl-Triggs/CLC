@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up &mdash; CLC Fragrances</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="login-style.css">
+</head>
+<body class="signup-page">
+  <div class="page-container">
+    <!-- Left Column: Sign Up Form -->
+    <main class="auth-panel signup-panel">
+      <!-- Top Logo Header -->
+      <header class="brand-header">
+        <a href="Login.html" class="brand-logo-link" aria-label="Back to CLC Login">
+          <img src="assets/logo.png" alt="CLC Logo" class="brand-logo" width="48" height="48">
+        </a>
+      </header>
+
+      <!-- Center Form Wrapper -->
+      <div class="form-container signup-form-container">
+        <!-- Title and Subtitle (Centered as in mockup) -->
+        <div class="heading-group text-center">
+          <h1 class="welcome-title">Sign Up</h1>
+          <p class="welcome-subtitle">Sign up to continue</p>
+        </div>
+
+        <!-- Inline Status Alert -->
+        <div id="signupStatusAlert" class="status-alert" role="alert" aria-live="polite"></div>
+
+        <!-- Sign Up Form -->
+        <form id="clcSignupForm" class="auth-form compact-form" novalidate>
+          <!-- First Name Field -->
+          <div class="form-group">
+            <label for="firstName" class="form-label">First Name</label>
+            <div class="input-control">
+              <input 
+                type="text" 
+                id="firstName" 
+                name="firstName" 
+                class="form-input" 
+                autocomplete="given-name"
+                required
+              >
+            </div>
+            <span class="error-message" id="firstNameError"></span>
+          </div>
+
+          <!-- Last Name Field -->
+          <div class="form-group">
+            <label for="lastName" class="form-label">Last Name</label>
+            <div class="input-control">
+              <input 
+                type="text" 
+                id="lastName" 
+                name="lastName" 
+                class="form-input" 
+                autocomplete="family-name"
+                required
+              >
+            </div>
+            <span class="error-message" id="lastNameError"></span>
+          </div>
+
+          <!-- Phone Number Field (Country Code + Number) -->
+          <div class="form-group">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <div class="phone-group">
+              <div class="select-wrapper country-code-wrapper">
+                <select id="countryCode" name="countryCode" class="form-select country-select" aria-label="Country Code">
+                  <option value="+1">&#x1F1FA;&#x1F1F8; +1</option>
+                  <option value="+44">&#x1F1EC;&#x1F1E7; +44</option>
+                  <option value="+63" selected>&#x1F1F5;&#x1F1ED; +63</option>
+                  <option value="+61">&#x1F1E6;&#x1F1FA; +61</option>
+                  <option value="+81">&#x1F1EF;&#x1F1F5; +81</option>
+                  <option value="+49">&#x1F1E9;&#x1F1EA; +49</option>
+                  <option value="+33">&#x1F1EB;&#x1F1F7; +33</option>
+                  <option value="+971">&#x1F1E6;&#x1F1EA; +971</option>
+                  <option value="+65">&#x1F1F8;&#x1F1EC; +65</option>
+                </select>
+                <span class="select-arrow">
+                  <svg viewBox="0 0 10 6" fill="currentColor"><path d="M0 0.5L5 5.5L10 0.5H0Z"/></svg>
+                </span>
+              </div>
+              <div class="input-control phone-input-wrapper">
+                <input 
+                  type="tel" 
+                  id="phoneNumber" 
+                  name="phoneNumber" 
+                  class="form-input" 
+                  autocomplete="tel-national"
+                  required
+                >
+              </div>
+            </div>
+            <span class="error-message" id="phoneError"></span>
+          </div>
+
+          <!-- Birthday Field (Month, Day, Year Selects) -->
+          <div class="form-group">
+            <label class="form-label">Birthday</label>
+            <div class="birthday-group">
+              <!-- Month -->
+              <div class="select-wrapper">
+                <select id="birthMonth" name="birthMonth" class="form-select" aria-label="Birth Month">
+                  <option value="" disabled selected>Month</option>
+                  <option value="1">Jan</option>
+                  <option value="2">Feb</option>
+                  <option value="3">Mar</option>
+                  <option value="4">Apr</option>
+                  <option value="5">May</option>
+                  <option value="6">Jun</option>
+                  <option value="7">Jul</option>
+                  <option value="8">Aug</option>
+                  <option value="9">Sep</option>
+                  <option value="10">Oct</option>
+                  <option value="11">Nov</option>
+                  <option value="12">Dec</option>
+                </select>
+                <span class="select-arrow">
+                  <svg viewBox="0 0 10 6" fill="currentColor"><path d="M0 0.5L5 5.5L10 0.5H0Z"/></svg>
+                </span>
+              </div>
+
+              <!-- Day -->
+              <div class="select-wrapper">
+                <select id="birthDay" name="birthDay" class="form-select" aria-label="Birth Day">
+                  <option value="" disabled selected>Day</option>
+                  <!-- Populated via JS or default days -->
+                </select>
+                <span class="select-arrow">
+                  <svg viewBox="0 0 10 6" fill="currentColor"><path d="M0 0.5L5 5.5L10 0.5H0Z"/></svg>
+                </span>
+              </div>
+
+              <!-- Year -->
+              <div class="select-wrapper">
+                <select id="birthYear" name="birthYear" class="form-select" aria-label="Birth Year">
+                  <option value="" disabled selected>Year</option>
+                  <!-- Populated via JS -->
+                </select>
+                <span class="select-arrow">
+                  <svg viewBox="0 0 10 6" fill="currentColor"><path d="M0 0.5L5 5.5L10 0.5H0Z"/></svg>
+                </span>
+              </div>
+            </div>
+            <span class="error-message" id="birthdayError"></span>
+          </div>
+
+          <!-- Email Field -->
+          <div class="form-group">
+            <label for="signupEmail" class="form-label">Email</label>
+            <div class="input-control">
+              <input 
+                type="email" 
+                id="signupEmail" 
+                name="email" 
+                class="form-input" 
+                autocomplete="email"
+                required
+              >
+            </div>
+            <span class="error-message" id="emailError"></span>
+          </div>
+
+          <!-- Password Field -->
+          <div class="form-group">
+            <label for="signupPassword" class="form-label">Password</label>
+            <div class="input-control">
+              <input 
+                type="password" 
+                id="signupPassword" 
+                name="password" 
+                class="form-input" 
+                autocomplete="new-password"
+                required
+              >
+              <button 
+                type="button" 
+                class="password-toggle-btn" 
+                id="togglePassword" 
+                aria-label="Show password"
+              >
+                <svg class="eye-icon eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg class="eye-icon eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                  <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                  <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3.5 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                  <line x1="2" y1="2" x2="22" y2="22"></line>
+                </svg>
+              </button>
+            </div>
+            <span class="error-message" id="passwordError"></span>
+          </div>
+
+          <!-- Sign Up Button -->
+          <div class="button-stack">
+            <button type="submit" class="btn btn-primary" id="signupSubmitBtn">
+              <span class="btn-text">Sign up</span>
+              <span class="spinner hidden" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <!-- Access Quickly Section -->
+          <div class="quick-access-section">
+            <span class="quick-access-label">ACCESS QUICKLY</span>
+            <div class="social-login-row">
+              <!-- Google Button -->
+              <button type="button" class="social-btn social-google" aria-label="Sign up with Google">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+              </button>
+
+              <!-- Facebook Button -->
+              <button type="button" class="social-btn social-facebook" aria-label="Sign up with Facebook">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </button>
+
+              <!-- Apple Button -->
+              <button type="button" class="social-btn social-apple" aria-label="Sign up with Apple">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.99.6-2.64 1.35-.57.65-1.07 1.71-.94 2.73 1 .08 2.03-.49 2.65-1.23"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Back to Login / Help Links -->
+          <div class="bottom-switch text-center">
+            <span class="switch-text">Already have an account?</span>
+            <a href="Login.html" class="inline-switch-link">Log in</a>
+          </div>
+          <div class="bottom-switch text-center" style="margin-top: 6px;">
+            <span class="switch-text">Need help?</span>
+            <a href="help.html" class="inline-switch-link">Visit Help Center</a>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Right Column: Sign Up Fragrance Visual -->
+    <aside class="hero-panel" aria-label="CLC Fragrance Campaign Visual">
+      <img 
+        src="assets/perfume-signup.png" 
+        alt="Avon today TOMORROW ALWAYS luxury perfume bottle positioned on minimalist white stone pedestals beside floral accents" 
+        class="hero-image"
+      >
+    </aside>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Script -->
+  <script src="signup.js"></script>
+</body>
+</html>
+

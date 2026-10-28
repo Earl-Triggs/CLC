@@ -335,10 +335,19 @@ if (accountButton && accountMenu) {
 }
 
 accountMenu?.addEventListener("click", event => {
-    if (event.target.closest('[role="menuitem"]')) {
-        setAccountMenuOpen(false);
-        accountButton?.focus();
+    const menuItem = event.target.closest('[role="menuitem"]');
+    if (!menuItem) return;
+
+    const action = menuItem.dataset.action;
+
+    if (action === "logout") {
+        localStorage.removeItem("clc_remembered_email");
+        window.location.href = "Login.html";
+        return;
     }
+
+    setAccountMenuOpen(false);
+    accountButton?.focus();
 });
 
 accountMenu?.addEventListener("keydown", event => {

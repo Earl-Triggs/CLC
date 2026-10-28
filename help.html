@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Center &mdash; CLC Support</title>
+
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login-style.css">
+</head>
+<body class="faq-body">
+  <header class="help-navbar">
+    <div class="navbar-container">
+      <div class="navbar-left">
+        <a href="index.html" class="navbar-brand-logo" aria-label="CLC Home">
+          <span class="logo-circle-badge">
+            <svg viewBox="0 0 40 40" width="28" height="28" fill="none">
+              <circle cx="20" cy="20" r="19" fill="#FFFFFF"/>
+              <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="12" fill="#412A45" letter-spacing="0.5">CLC</text>
+            </svg>
+          </span>
+        </a>
+        <span class="navbar-title">Help Center</span>
+        <nav class="navbar-links" aria-label="Primary">
+          <a href="Login.html" class="nav-link">Login</a>
+          <a href="faq.html" class="nav-link">FAQ</a>
+          <a href="signup.html" class="nav-link">Sign Up</a>
+        </nav>
+      </div>
+
+      <div class="navbar-right">
+        <div class="account-menu-wrapper">
+          <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true"
+            aria-expanded="false" aria-controls="account-menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.5"></circle>
+              <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+            </svg>
+          </button>
+          <div class="account-menu" id="account-menu" role="menu" aria-label="Account options" hidden>
+            <p class="account-menu-heading" role="presentation">YOUR ACCOUNT</p>
+            <a href="account.html" role="menuitem">Account</a>
+            <a href="settings.html" role="menuitem">Settings</a>
+            <a href="help.html" role="menuitem" aria-current="page">Help</a>
+            <hr role="separator">
+            <button type="button" role="menuitem" data-action="logout">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="faq-main-wrapper">
+    <div class="faq-card-container help-card-container">
+      <article class="faq-card help-card">
+        <div class="guide-tag">CLC &mdash; Support</div>
+        <h1 class="guide-main-title">How can we help?</h1>
+        <p class="guide-lead-text">
+          Welcome to the CLC Help Center. Use the links below to get started with account access, fragrance recommendations, and common shopping questions.
+        </p>
+
+        <section class="guide-section">
+          <h2 class="guide-section-heading">Account &amp; login</h2>
+          <p class="guide-body-text">Need to sign in, reset your password, or create an account? Use the login page to access your profile and the sign-up page to join CLC.</p>
+        </section>
+
+        <section class="guide-section">
+          <h2 class="guide-section-heading">Fragrance guide</h2>
+          <p class="guide-body-text">Learn how to choose a scent based on mood, occasion, fragrance family, and personal preference. We also share tips for finding the right notes and longevity.</p>
+        </section>
+
+        <section class="guide-section">
+          <h2 class="guide-section-heading">Shopping support</h2>
+          <ul class="guide-list">
+            <li>Browse options for men, women, kids, and unisex fragrances.</li>
+            <li>Check product care and scent notes before purchasing.</li>
+            <li>Reach out to support if you need help choosing the right fragrance.</li>
+          </ul>
+        </section>
+
+        <div class="help-actions">
+          <a href="faq.html" class="btn-faq-action">View FAQ</a>
+          <a href="Login.html" class="btn-faq-action">Login</a>
+          <a href="signup.html" class="btn-faq-action">Create Account</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="help-footer">
+    <div class="footer-container">
+      <p class="copyright-text">&copy; 2026 CLC. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
