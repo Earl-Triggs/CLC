@@ -22,12 +22,25 @@
             <nav class="nav-links" aria-label="Main navigation">
                 <a href="index.html">Home</a>
             </nav>
-            <a class="account-header-icon" href="account.html" aria-label="Your account" aria-current="page">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="12" cy="8" r="3.5"></circle>
-                    <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
-                </svg>
-            </a>
+            <div class="nav-icons">
+                <div class="account-menu-wrapper">
+                    <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true"
+                        aria-expanded="false" aria-controls="account-menu">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="3.5"></circle>
+                            <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                        </svg>
+                    </button>
+                    <div class="account-menu" id="account-menu" role="menu" aria-label="Account options" hidden>
+                        <p class="account-menu-heading" role="presentation">YOUR ACCOUNT</p>
+                        <a href="account.html" role="menuitem" aria-current="page">Account</a>
+                        <a href="settings.html" role="menuitem">Settings</a>
+                        <button type="button" role="menuitem">Help</button>
+                        <hr role="separator">
+                        <button type="button" role="menuitem">Logout</button>
+                    </div>
+                </div>
+            </div>
         </header>
 
         <main class="account-main">
@@ -86,6 +99,7 @@
             <p>© 2026 CLC. All Rights Reserved.</p>
         </footer>
     </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
