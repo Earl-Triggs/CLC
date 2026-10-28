@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Review and search CLC sales transactions.">
+    <title>Sales History | CLC Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="sales-history.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="dashboard-page sales-history-page">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar">
+            <a href="index.html" class="dashboard-logo" aria-label="CLC home">CLC</a>
+            <nav class="dashboard-navigation" aria-label="Dashboard navigation">
+                <p class="sidebar-label">Menu</p>
+                <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+                <a href="admin-products.html" class="sidebar-link">Products</a>
+                <a href="admin-add-product.html" class="sidebar-link">Add Products</a>
+                <p class="sidebar-label history-label">History</p>
+                <a href="sales-history.html" class="sidebar-link active" aria-current="page">Sales History</a>
+                <a href="dashboard.html#inventory-chart" class="sidebar-link">Inventory Logs</a>
+                <a href="dashboard.html#activity" class="sidebar-link">Log History</a>
+            </nav>
+        </aside>
+
+        <div class="dashboard-workspace">
+            <header class="dashboard-header">
+                <h1>Sales History</h1>
+                <div class="nav-icons">
+                    <div class="account-menu-wrapper">
+                        <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true"
+                            aria-expanded="false" aria-controls="account-menu">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="8" r="3.5"></circle>
+                                <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                            </svg>
+                        </button>
+                        <div class="account-menu" id="account-menu" role="menu" aria-label="Account options" hidden>
+                            <p class="account-menu-heading" role="presentation">YOUR ACCOUNT</p>
+                            <a href="account.html" role="menuitem">Account</a>
+                            <a href="settings.html" role="menuitem">Settings</a>
+                            <button type="button" role="menuitem">Help</button>
+                            <hr role="separator">
+                            <button type="button" role="menuitem">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="sales-main">
+                <section class="sales-summary" aria-label="Sales totals">
+                    <article><h2>Total Revenue</h2><p id="total-revenue">₱0</p></article>
+                    <article><h2>Transactions</h2><p id="total-transactions">0</p></article>
+                    <article><h2>Total Items Sold</h2><p id="total-items">0</p></article>
+                </section>
+
+                <section class="sales-controls" aria-label="Filter sales history">
+                    <label class="sales-search-label">
+                        <span class="visually-hidden">Search sales</span>
+                        <input id="sales-search" type="search" placeholder="Search order no, items,...">
+                    </label>
+                    <label>
+                        <span class="visually-hidden">Payment type</span>
+                        <select id="payment-filter">
+                            <option value="all">All Payment Types</option>
+                            <option value="GCash">GCash</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Card">Card</option>
+                        </select>
+                    </label>
+                    <label>
+                        <span class="visually-hidden">Sort by order date</span>
+                        <select id="date-sort">
+                            <option value="desc">Newest to Oldest</option>
+                            <option value="asc">Oldest to Newest</option>
+                        </select>
+                    </label>
+                    <label>
+                        <span class="visually-hidden">Sort by total amount</span>
+                        <select id="amount-sort">
+                            <option value="desc">Highest Amount</option>
+                            <option value="asc">Lowest Amount</option>
+                        </select>
+                    </label>
+                </section>
+
+                <div class="sales-table-frame">
+                    <div class="sales-table-scroll" tabindex="0" aria-label="Scrollable sales transactions">
+                        <table class="sales-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Order No.</th>
+                                    <th scope="col">Item</th>
+                                    <th scope="col">Payment Method</th>
+                                    <th scope="col">Total Amount</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sales-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="sales-empty" id="sales-empty" hidden>No sales match your search and filters.</p>
+            </main>
+        </div>
+    </div>
+
+    <dialog class="sale-details-dialog" id="sale-details-dialog" aria-labelledby="sale-details-title">
+        <div class="sale-dialog-header">
+            <h2 id="sale-details-title">Order details</h2>
+            <button type="button" id="sale-dialog-close" aria-label="Close order details">&times;</button>
+        </div>
+        <dl id="sale-details-content"></dl>
+    </dialog>
+
+    <script src="script.js"></script>
+    <script src="sales-history.js"></script>
+</body>
+
+</html>
