@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLC Perfume Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="site-container">
+
+        <!-- NAVIGATION -->
+
+        <header class="navbar">
+            <a href="#" class="logo">CLC</a>
+
+            <nav class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="kids-shop.html">Shop</a>
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search perfumes..." aria-label="Search perfumes">
+                <button id="search-btn" aria-label="Open search" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="10.8" cy="10.8" r="7.3"></circle>
+                        <path d="m16.2 16.2 5 5"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="nav-icons">
+                <button id="cart-btn" aria-label="Shopping cart" aria-haspopup="dialog" aria-expanded="false">
+                    🛒 <span id="cart-count">0</span>
+                </button>
+                <div class="account-menu-wrapper">
+                    <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true"
+                        aria-expanded="false" aria-controls="account-menu">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="3.5"></circle>
+                            <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                        </svg>
+                    </button>
+                    <div class="account-menu" id="account-menu" role="menu" aria-label="Account options" hidden>
+                        <p class="account-menu-heading" role="presentation">YOUR ACCOUNT</p>
+                        <button type="button" role="menuitem">Account</button>
+                        <button type="button" role="menuitem">Settings</button>
+                        <button type="button" role="menuitem">Help</button>
+                        <hr role="separator">
+                        <button type="button" role="menuitem">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Where luxury lingers<br>in every spray</h1>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="features">
+            <div class="feature">
+                <span class="feature-icon">♧</span>
+                <div>
+                    <h4>Hand Picked</h4>
+                    <p>Natural selection<br>of ingredients</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <span class="feature-icon">✔</span>
+                <div>
+                    <h4>Quality</h4>
+                    <p>Scientifically<br>tested and proven</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <span class="feature-icon">☷</span>
+                <div>
+                    <h4>Trusted Partners</h4>
+                    <p>Contains products<br>from official partners</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHOP BY CATEGORY -->
+        <section class="categories section" id="categories">
+            <div class="section-heading">
+                <span></span>
+                <h2>SHOP BY CATEGORY</h2>
+                <span></span>
+            </div>
+
+            <div class="category-buttons">
+                <a class="category-btn" href="kids-shop.html">KIDS</a>
+                <a class="category-btn" href="men-shop.html">MEN</a>
+                <a class="category-btn" href="women-shop.html">WOMEN</a>
+                <a class="category-btn" href="unisex-shop.html">UNISEX</a>
+            </div>
+        </section>
+
+        <!-- HYPOALLERGENIC BANNER -->
+        <section class="about-banner" id="about">
+            <div class="banner-content">
+                <p class="eyebrow">WORRIED OF ALLERGIES?</p>
+                <h2>Our Products are<br>Hypoallergenic</h2>
+                <p>Shop worry free with our skin<br>
+                    friendly formulas.</p>
+                <a href="#best-sellers" class="discover-btn">
+                    Discover more →
+                </a>
+            </div>
+
+            <div class="banner-image"></div>
+        </section>
+
+        <!-- BEST SELLERS -->
+        <section class="best-sellers section" id="best-sellers">
+            <div class="section-heading">
+                <span></span>
+                <h2>BEST SELLERS</h2>
+                <span></span>
+            </div>
+
+            <div class="product-grid" id="product-grid"></div>
+
+            <p id="no-results" hidden>No matching perfumes found.</p>
+        </section>
+
+        <!-- FOOTER -->
+        <footer id="contact">
+            <p>© 2026 CLC. All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+    <div class="cart-backdrop" id="cart-backdrop" hidden></div>
+    <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true"
+        aria-labelledby="cart-title" aria-hidden="true" hidden>
+        <div class="cart-drawer-header">
+            <h2 id="cart-title">Your Cart <span id="cart-item-count">(0)</span></h2>
+            <button type="button" class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items" aria-live="polite"></div>
+        <div class="cart-drawer-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <strong id="cart-subtotal">$0.00</strong>
+            </div>
+            <p>Checkout is not connected in this demo.</p>
+        </div>
+    </aside>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

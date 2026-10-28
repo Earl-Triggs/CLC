@@ -1,0 +1,293 @@
+.kids-page .site-container {
+    overflow: clip;
+}
+
+.kids-page .navbar {
+    min-height: 42px;
+    padding: 0 12px;
+    gap: clamp(18px, 4vw, 34px);
+}
+
+.kids-page .logo {
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+}
+
+.kids-page .nav-links {
+    gap: clamp(14px, 3vw, 28px);
+}
+
+.kids-page .nav-links a {
+    font-size: clamp(12px, 1.5vw, 15px);
+}
+
+.kids-page .nav-icons {
+    gap: 14px;
+}
+
+.kids-page .nav-icons > button {
+    font-size: 21px;
+}
+
+.kids-page .nav-icons #account-btn {
+    width: 30px;
+    height: 30px;
+}
+
+.kids-page #account-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+.kids-catalog {
+    width: min(82%, 1050px);
+    margin: 0 auto;
+    padding: 24px 0 42px;
+}
+
+.kids-category-nav {
+    display: flex;
+    justify-content: center;
+    gap: clamp(14px, 3.5vw, 40px);
+    margin-bottom: 24px;
+}
+
+.kids-category-nav .category-btn {
+    width: clamp(105px, 14.3vw, 160px);
+    min-width: 0;
+    padding: 5px 12px;
+    border: 3px solid #b38ab7;
+    color: #a780ac;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 2px 5px #0003;
+}
+
+.kids-category-nav .category-btn.selected,
+.kids-category-nav .category-btn:hover {
+    background: #a780ac;
+    color: white;
+}
+
+.kids-product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: clamp(18px, 4.7vw, 48px);
+    row-gap: 40px;
+}
+
+.kids-product-grid .product-card {
+    border: 1px solid #777;
+    border-radius: 0 0 12px 12px;
+    box-shadow: none;
+}
+
+.kids-product-grid .product-card:hover {
+    box-shadow: 0 5px 12px #0002;
+}
+
+.kids-product-grid .product-card img {
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.kids-product-grid .product-info {
+    padding: 5px 8px 6px;
+}
+
+.kids-product-grid .product-info h3,
+.kids-product-grid .price {
+    font-size: 11px;
+}
+
+.kids-product-grid .stars {
+    margin: 2px 0 4px;
+    color: #604080;
+    font-size: 12px;
+}
+
+.kids-product-grid .add-to-cart {
+    padding: 2px 4px;
+    border: 1.5px solid #b38ab7;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.kids-feature-banner {
+    display: grid;
+    grid-template-columns: 42.4% 57.6%;
+    min-height: clamp(220px, 28.5vw, 390px);
+}
+
+.kids-feature-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px clamp(28px, 7.8vw, 100px);
+    background: #eee0ef;
+}
+
+.kids-feature-copy .eyebrow {
+    margin-bottom: 10px;
+    font-size: clamp(12px, 1.5vw, 18px);
+}
+
+.kids-feature-copy h1 {
+    margin-bottom: 2px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 3.2vw, 42px);
+    line-height: 1.2;
+}
+
+.kids-feature-copy > p:not(.eyebrow) {
+    font-size: clamp(12px, 1.3vw, 16px);
+    line-height: 1.35;
+}
+
+.kids-feature-add {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 9px 14px;
+    border: 0;
+    border-radius: 9px;
+    background: #a780ac;
+    box-shadow: 0 3px 5px #0003;
+    color: white;
+    font-size: clamp(11px, 1.2vw, 14px);
+    font-weight: 600;
+}
+
+.kids-feature-add:hover {
+    background: #86588d;
+}
+
+.kids-feature-image {
+    min-height: inherit;
+    background:
+        linear-gradient(135deg, rgba(237, 114, 173, 0.3), rgba(107, 197, 197, 0.28)),
+        url("https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=1200&q=85") center 48% / cover;
+}
+
+.kids-catalog-more {
+    padding-top: 26px;
+    padding-bottom: 80px;
+}
+
+.kids-no-results {
+    padding: 20px;
+    text-align: center;
+}
+
+.kids-footer-heading {
+    display: flex;
+    width: min(66%, 520px);
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto 28px;
+    font-size: clamp(13px, 1.6vw, 18px);
+    white-space: nowrap;
+}
+
+.kids-footer-heading span {
+    height: 1px;
+    flex: 1;
+    background: #222;
+}
+
+.kids-page footer {
+    padding: 12px;
+    font-size: 10px;
+}
+
+@media (max-width: 650px) {
+    .kids-page .navbar {
+        min-height: 58px;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 8px 14px;
+    }
+
+    .kids-page .nav-links {
+        order: 3;
+        flex-basis: 100%;
+        justify-content: center;
+    }
+
+    .kids-catalog {
+        width: min(90%, 520px);
+        padding: 22px 0 32px;
+    }
+
+    .kids-category-nav {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .kids-category-nav .category-btn {
+        width: min(42%, 150px);
+        font-size: 11px;
+    }
+
+    .kids-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 14px;
+        row-gap: 24px;
+    }
+
+    .kids-product-grid .product-info {
+        padding: 5px 6px 7px;
+    }
+
+    .kids-product-grid .product-info h3,
+    .kids-product-grid .price {
+        font-size: 11px;
+    }
+
+    .kids-product-grid .stars {
+        font-size: 11px;
+    }
+
+    .kids-product-grid .add-to-cart {
+        font-size: 9px;
+    }
+
+    .kids-feature-banner {
+        grid-template-columns: 42% 58%;
+        min-height: 230px;
+    }
+
+    .kids-feature-copy {
+        padding: 20px;
+    }
+
+    .kids-catalog-more {
+        padding-top: 22px;
+        padding-bottom: 52px;
+    }
+}
+
+@media (max-width: 380px) {
+    .kids-product-grid {
+        column-gap: 10px;
+        row-gap: 18px;
+    }
+
+    .kids-product-grid .product-info h3,
+    .kids-product-grid .price {
+        font-size: 9px;
+    }
+
+    .kids-product-grid .add-to-cart {
+        font-size: 8px;
+    }
+
+    .kids-feature-copy {
+        padding: 14px;
+    }
+}

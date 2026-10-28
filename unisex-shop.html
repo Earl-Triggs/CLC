@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore unisex fragrances at CLC Perfume Shop.">
+    <title>Unisex Shop | CLC Perfume Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="kids-shop.css">
+    <link rel="stylesheet" href="category-shop.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="kids-page category-page category-unisex" data-category="Unisex">
+    <div class="site-container">
+        <header class="navbar">
+            <a href="index.html" class="logo" aria-label="CLC home">CLC</a>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="unisex-shop.html" class="active" aria-current="page">Shop</a>
+                <a href="index.html#about">About Us</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search perfumes..." aria-label="Search perfumes">
+                <button id="search-btn" aria-label="Open search" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="10.8" cy="10.8" r="7.3"></circle>
+                        <path d="m16.2 16.2 5 5"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="nav-icons">
+                <button id="cart-btn" aria-label="Shopping cart" aria-haspopup="dialog" aria-expanded="false">
+                    🛒 <span id="cart-count">0</span>
+                </button>
+                <div class="account-menu-wrapper">
+                    <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true"
+                        aria-expanded="false" aria-controls="account-menu">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="3.5"></circle>
+                            <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                        </svg>
+                    </button>
+                    <div class="account-menu" id="account-menu" role="menu" aria-label="Account options" hidden>
+                        <p class="account-menu-heading" role="presentation">YOUR ACCOUNT</p>
+                        <button type="button" role="menuitem">Account</button>
+                        <button type="button" role="menuitem">Settings</button>
+                        <button type="button" role="menuitem">Help</button>
+                        <hr role="separator">
+                        <button type="button" role="menuitem">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="kids-catalog" aria-label="Shop unisex fragrances">
+                <nav class="kids-category-nav" aria-label="Shop by category">
+                    <a class="category-btn" href="kids-shop.html">KIDS</a>
+                    <a class="category-btn" href="men-shop.html">MEN</a>
+                    <a class="category-btn" href="women-shop.html">WOMEN</a>
+                    <a class="category-btn selected" href="unisex-shop.html" aria-current="page">UNISEX</a>
+                </nav>
+                <div class="kids-product-grid" id="category-featured-products"></div>
+            </section>
+
+            <section class="kids-feature-banner" aria-labelledby="category-feature-title">
+                <div class="kids-feature-copy">
+                    <p class="eyebrow">BEST SELLER</p>
+                    <h1 id="category-feature-title">MEMORIES</h1>
+                    <p>A balanced, memorable scent<br>for every day and everyone.</p>
+                    <button class="kids-feature-add add-to-cart" data-name="Memories" data-price="30.00">
+                        <span aria-hidden="true">🛒</span> ADD TO CART
+                    </button>
+                </div>
+                <div class="kids-feature-image" role="img" aria-label="Unisex fragrance feature"></div>
+            </section>
+
+            <section class="kids-catalog kids-catalog-more" aria-label="More unisex fragrances">
+                <div class="kids-product-grid" id="product-grid"></div>
+            </section>
+            <p class="kids-no-results" id="no-results" hidden>No matching perfumes found.</p>
+            <div class="kids-footer-heading" aria-hidden="true">
+                <span></span><strong>WORKING ON YOUR SCENT</strong><span></span>
+            </div>
+        </main>
+
+        <footer id="contact"><p>© 2026 CLC. All Rights Reserved.</p></footer>
+    </div>
+
+    <div class="cart-backdrop" id="cart-backdrop" hidden></div>
+    <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true"
+        aria-labelledby="cart-title" aria-hidden="true" hidden>
+        <div class="cart-drawer-header">
+            <h2 id="cart-title">Your Cart <span id="cart-item-count">(0)</span></h2>
+            <button type="button" class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items" aria-live="polite"></div>
+        <div class="cart-drawer-footer">
+            <div class="cart-subtotal"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+            <p>Checkout is not connected in this demo.</p>
+        </div>
+    </aside>
+    <script src="category-products.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
