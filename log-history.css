@@ -1,0 +1,77 @@
+.log-history-page .dashboard-shell {
+    min-height: 100vh;
+}
+
+.log-history-main {
+    min-height: calc(100vh - 74px);
+    padding: 20px 30px 24px;
+    background: #dedede;
+}
+
+.log-history-controls {
+    grid-template-columns: minmax(180px, 1fr) repeat(2, minmax(120px, 0.25fr));
+    margin-bottom: 13px;
+}
+
+.log-history-table-scroll {
+    max-height: calc(100vh - 240px);
+    min-height: 340px;
+}
+
+.log-history-table {
+    table-layout: fixed;
+}
+
+.log-history-table th,
+.log-history-table td {
+    text-align: center;
+}
+
+.log-history-table th:first-child,
+.log-history-table td:first-child {
+    width: 19%;
+    text-align: left;
+}
+
+.log-history-table th:nth-child(2),
+.log-history-table td:nth-child(2) {
+    width: 47%;
+}
+
+.log-history-table th:last-child,
+.log-history-table td:last-child {
+    width: 34%;
+}
+
+@media (max-width: 900px) {
+    .log-history-main {
+        padding: 16px;
+    }
+
+    .log-history-controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .log-history-controls .sales-search-label {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 650px) {
+    .log-history-main {
+        min-height: calc(100vh - 116px);
+        padding: 12px;
+    }
+
+    .log-history-controls {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .log-history-controls .sales-search-label {
+        grid-column: auto;
+    }
+
+    .log-history-table {
+        min-width: 520px;
+    }
+}
