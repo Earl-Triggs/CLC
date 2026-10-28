@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLC &mdash; Where Luxury Lingers in Every Spray</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="login-style.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Left Column: Login / Authentication Form -->
+    <main class="auth-panel">
+      <!-- Top Logo Header -->
+      <header class="brand-header">
+        <a href="index.html" class="brand-logo-link" aria-label="CLC Home">
+          <img src="assets/logo.png" alt="CLC Logo" class="brand-logo" width="48" height="48">
+        </a>
+      </header>
+
+      <!-- Form Container Area -->
+      <div class="form-container">
+        <!-- Title and Subtitle -->
+        <div class="heading-group">
+          <h1 class="welcome-title" id="authTitle">Welcome to CLC</h1>
+          <p class="welcome-subtitle" id="authSubtitle">Where luxury lingers in every spray</p>
+        </div>
+
+        <!-- Notification Toast Banner (Inline) -->
+        <div id="statusAlert" class="status-alert" role="alert" aria-live="polite"></div>
+
+        <!-- ================= Login Form ================= -->
+        <form id="loginForm" class="auth-form" novalidate>
+          <!-- Email Input Field -->
+          <div class="form-group">
+            <label for="loginEmail" class="form-label">Email</label>
+            <div class="input-control">
+              <input 
+                type="email" 
+                id="loginEmail" 
+                name="email" 
+                class="form-input" 
+                placeholder="Enter your email" 
+                autocomplete="email"
+                required
+              >
+            </div>
+            <span class="error-message" id="loginEmailError"></span>
+          </div>
+
+          <!-- Password Input Field -->
+          <div class="form-group">
+            <label for="loginPassword" class="form-label">Password</label>
+            <div class="input-control">
+              <input 
+                type="password" 
+                id="loginPassword" 
+                name="password" 
+                class="form-input" 
+                placeholder="Enter your password" 
+                autocomplete="current-password"
+                required
+              >
+              <button 
+                type="button" 
+                class="password-toggle-btn" 
+                id="toggleLoginPassword" 
+                aria-label="Show password"
+                title="Toggle password visibility"
+              >
+                <!-- Eye Icon SVG -->
+                <svg class="eye-icon eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg class="eye-icon eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                  <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                  <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3.5 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                  <line x1="2" y1="2" x2="22" y2="22"></line>
+                </svg>
+              </button>
+            </div>
+            <span class="error-message" id="loginPasswordError"></span>
+          </div>
+
+          <!-- Options Row: Remember Me & Forgot Password -->
+          <div class="form-options">
+            <label class="remember-wrapper" for="rememberMe">
+              <input type="checkbox" id="rememberMe" name="rememberMe" class="real-checkbox">
+              <span class="custom-checkbox-box">
+                <svg class="check-icon" viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="1.5 5 4.5 8 10.5 2"></polyline>
+                </svg>
+              </span>
+              <span class="remember-label">Remember me</span>
+            </label>
+            <button type="button" class="forgot-password-link" id="forgotPasswordBtn">Forgot password?</button>
+          </div>
+
+          <!-- Buttons Group -->
+          <div class="button-stack">
+            <button type="submit" class="btn btn-primary" id="loginSubmitBtn">
+              <span class="btn-text">Log in</span>
+              <span class="spinner hidden" aria-hidden="true"></span>
+            </button>
+            <a href="signup.html" class="btn btn-secondary" id="showSignupBtn">
+              Sign up
+            </a>
+          </div>
+
+          <!-- FAQ / Help Links -->
+          <div class="auth-auxiliary-links text-center" style="margin-top: 14px; display: flex; flex-direction: column; gap: 6px;">
+            <a href="faq.html" class="inline-switch-link" style="font-size: 0.84rem; color: #747474; font-weight: 500;">Need help choosing? Read our <strong style="color: #412A45; text-decoration: underline;">Fragrance Guide &amp; FAQ</strong></a>
+            <a href="help.html" class="inline-switch-link" style="font-size: 0.84rem; color: #747474; font-weight: 500;">Need account support? Visit the <strong style="color: #412A45; text-decoration: underline;">CLC Help Center</strong></a>
+          </div>
+        </form>
+
+        <!-- ================= Sign Up Form (Smooth Toggle) ================= -->
+        <form id="signupForm" class="auth-form hidden" novalidate>
+          <!-- Full Name -->
+          <div class="form-group">
+            <label for="signupName" class="form-label">Full Name</label>
+            <div class="input-control">
+              <input 
+                type="text" 
+                id="signupName" 
+                name="fullName" 
+                class="form-input" 
+                placeholder="Enter your full name" 
+                autocomplete="name"
+                required
+              >
+            </div>
+            <span class="error-message" id="signupNameError"></span>
+          </div>
+
+          <!-- Email Input Field -->
+          <div class="form-group">
+            <label for="signupEmail" class="form-label">Email</label>
+            <div class="input-control">
+              <input 
+                type="email" 
+                id="signupEmail" 
+                name="email" 
+                class="form-input" 
+                placeholder="Enter your email" 
+                autocomplete="email"
+                required
+              >
+            </div>
+            <span class="error-message" id="signupEmailError"></span>
+          </div>
+
+          <!-- Password Input Field -->
+          <div class="form-group">
+            <label for="signupPassword" class="form-label">Password</label>
+            <div class="input-control">
+              <input 
+                type="password" 
+                id="signupPassword" 
+                name="password" 
+                class="form-input" 
+                placeholder="Create a password (min. 8 characters)" 
+                autocomplete="new-password"
+                required
+              >
+              <button 
+                type="button" 
+                class="password-toggle-btn" 
+                id="toggleSignupPassword" 
+                aria-label="Show password"
+                title="Toggle password visibility"
+              >
+                <svg class="eye-icon eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7Z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg class="eye-icon eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                  <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                  <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3.5 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                  <line x1="2" y1="2" x2="22" y2="22"></line>
+                </svg>
+              </button>
+            </div>
+            <span class="error-message" id="signupPasswordError"></span>
+          </div>
+
+          <!-- Terms Checkbox -->
+          <div class="form-options">
+            <label class="remember-wrapper" for="agreeTerms">
+              <input type="checkbox" id="agreeTerms" name="agreeTerms" class="real-checkbox">
+              <span class="custom-checkbox-box">
+                <svg class="check-icon" viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="1.5 5 4.5 8 10.5 2"></polyline>
+                </svg>
+              </span>
+              <span class="remember-label">I agree to CLC's <a href="#privacy" class="inline-link">Terms &amp; Privacy</a></span>
+            </label>
+          </div>
+
+          <!-- Buttons Group -->
+          <div class="button-stack">
+            <button type="submit" class="btn btn-primary" id="signupSubmitBtn">
+              <span class="btn-text">Create Account</span>
+              <span class="spinner hidden" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-secondary" id="showLoginBtn">
+              Already have an account? Log in
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Right Column: Full Bleed Perfume Image -->
+    <aside class="hero-panel" aria-label="CLC Fragrance Campaign Visual">
+      <img 
+        src="assets/perfume.jpg" 
+        alt="CLC luxury perfume bottle infused with dried purple botanical florals in radiant sunbeams" 
+        class="hero-image"
+      >
+    </aside>
+  </div>
+
+  <!-- ================= Forgot Password Modal ================= -->
+  <div class="modal-backdrop hidden" id="forgotModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" id="closeForgotModal" aria-label="Close dialog">&times;</button>
+      <div class="modal-header">
+        <h2 id="modalTitle" class="modal-title">Reset your password</h2>
+        <p class="modal-subtitle">Enter your CLC account email address and we'll send you instructions to reset your password.</p>
+      </div>
+      <form id="forgotForm" novalidate>
+        <div class="form-group">
+          <label for="resetEmail" class="form-label">Email</label>
+          <div class="input-control">
+            <input 
+              type="email" 
+              id="resetEmail" 
+              class="form-input" 
+              placeholder="Enter your registered email" 
+              required
+            >
+          </div>
+          <span class="error-message" id="resetEmailError"></span>
+        </div>
+        <button type="submit" class="btn btn-primary modal-submit-btn">Send Reset Link</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container for Notifications -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Script -->
+  <script src="login.js"></script>
+</body>
+</html>
+
