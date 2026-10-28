@@ -70,6 +70,14 @@
     outline-offset: 3px;
 }
 
+.account-navbar .nav-icons {
+    margin-left: auto;
+}
+
+.settings-navbar .nav-icons {
+    margin-left: auto;
+}
+
 .account-main {
     position: relative;
     display: grid;
