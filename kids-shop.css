@@ -2,44 +2,6 @@
     overflow: clip;
 }
 
-.kids-page .navbar {
-    min-height: 42px;
-    padding: 0 12px;
-    gap: clamp(18px, 4vw, 34px);
-}
-
-.kids-page .logo {
-    width: 36px;
-    height: 36px;
-    font-size: 15px;
-}
-
-.kids-page .nav-links {
-    gap: clamp(14px, 3vw, 28px);
-}
-
-.kids-page .nav-links a {
-    font-size: clamp(12px, 1.5vw, 15px);
-}
-
-.kids-page .nav-icons {
-    gap: 14px;
-}
-
-.kids-page .nav-icons > button {
-    font-size: 21px;
-}
-
-.kids-page .nav-icons #account-btn {
-    width: 30px;
-    height: 30px;
-}
-
-.kids-page #account-btn svg {
-    width: 22px;
-    height: 22px;
-}
-
 .kids-catalog {
     width: min(82%, 1050px);
     margin: 0 auto;
@@ -205,19 +167,6 @@
 }
 
 @media (max-width: 650px) {
-    .kids-page .navbar {
-        min-height: 58px;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 8px 14px;
-    }
-
-    .kids-page .nav-links {
-        order: 3;
-        flex-basis: 100%;
-        justify-content: center;
-    }
-
     .kids-catalog {
         width: min(90%, 520px);
         padding: 22px 0 32px;
