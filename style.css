@@ -195,8 +195,24 @@ a {
     text-align: left;
 }
 
+.account-menu a[role="menuitem"] {
+    display: block;
+    padding: 10px;
+    border-radius: 7px;
+    color: inherit;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
 .account-menu button:hover,
 .account-menu button:focus-visible {
+    background: #f5eef6;
+    outline: 2px solid #a780ac;
+    outline-offset: -2px;
+}
+
+.account-menu a[role="menuitem"]:hover,
+.account-menu a[role="menuitem"]:focus-visible {
     background: #f5eef6;
     outline: 2px solid #a780ac;
     outline-offset: -2px;

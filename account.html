@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View your CLC account details.">
+    <title>Accounts | CLC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="account.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="account-page">
+    <div class="site-container">
+        <header class="navbar account-navbar">
+            <a href="index.html" class="logo" aria-label="CLC home">CLC</a>
+            <h1>Accounts</h1>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+            </nav>
+            <a class="account-header-icon" href="account.html" aria-label="Your account" aria-current="page">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="8" r="3.5"></circle>
+                    <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                </svg>
+            </a>
+        </header>
+
+        <main class="account-main">
+            <section class="account-card" aria-label="Your account details">
+                <div class="account-profile">
+                    <div class="account-avatar" aria-hidden="true">
+                        <svg viewBox="0 0 80 80">
+                            <circle cx="40" cy="25" r="10"></circle>
+                            <path d="M17 62v-5c0-8 9-13 23-13s23 5 23 13v5H17Z"></path>
+                        </svg>
+                    </div>
+                    <p>Account Full Name</p>
+                    <p>account@email.com</p>
+                </div>
+
+                <section class="personal-details" aria-labelledby="personal-details-title">
+                    <h2 id="personal-details-title">Personal details</h2>
+                    <dl class="details-list">
+                        <div class="detail-row">
+                            <dt>Full name:</dt>
+                            <dd>Account Full Name</dd>
+                        </div>
+                        <div class="detail-row">
+                            <dt>Date of Birth:</dt>
+                            <dd>January 1, 1987</dd>
+                        </div>
+                        <div class="detail-row">
+                            <dt>Gender:</dt>
+                            <dd>Non-Binary</dd>
+                        </div>
+                        <div class="detail-row">
+                            <dt>Nationality:</dt>
+                            <dd>Computer Citizen</dd>
+                        </div>
+                        <div class="detail-row">
+                            <dt>Address:</dt>
+                            <dd>Inside my PC</dd>
+                        </div>
+                        <div class="detail-row">
+                            <dt>Phone Number:</dt>
+                            <dd>091234567</dd>
+                        </div>
+                        <div class="detail-row">
+                            <dt>Email:</dt>
+                            <dd>account@email.com</dd>
+                        </div>
+                    </dl>
+                    <div class="account-actions">
+                        <a href="index.html" class="logout-button">Logout</a>
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <footer class="account-footer">
+            <p>© 2026 CLC. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
