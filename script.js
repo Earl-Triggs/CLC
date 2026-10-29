@@ -38,6 +38,19 @@ const cartSubtotal = document.getElementById("cart-subtotal");
 const cartButton = document.getElementById("cart-btn");
 const cartCloseButton = document.getElementById("cart-close");
 const cartStorageKey = "clc-cart-v1";
+const productDetailBackdrop = document.getElementById("product-detail-backdrop");
+const productDetailDialog = document.getElementById("product-detail-dialog");
+const productDetailCloseButton = document.getElementById("product-detail-close");
+const productDetailImage = document.getElementById("product-detail-image");
+const productDetailTitle = document.getElementById("product-detail-title");
+const productDetailCategory = document.getElementById("product-detail-category");
+const productDetailPrice = document.getElementById("product-detail-price");
+const productDetailDescription = document.getElementById("product-detail-description");
+const productQuantity = document.getElementById("product-quantity");
+const productDetailAddButton = document.getElementById("product-detail-add");
+const productDetailBuyButton = document.getElementById("product-detail-buy");
+let activeProductTrigger = null;
+let selectedProduct = null;
 
 function loadCart() {
     try {
@@ -76,17 +89,31 @@ function renderProducts() {
         const grid = document.getElementById(section.targetId);
         if (!grid) return;
 
-        grid.innerHTML = section.products.map(product => `
-            <article class="product-card" data-category="${escapeHtml(product.category)}">
-                <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.imageAlt || `${product.name} perfume`)}" loading="lazy">
-                <div class="product-info">
-                    <h3>${escapeHtml(product.name)}</h3>
-                    <p class="price">$${product.price.toFixed(2)}</p>
-                    <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+        grid.innerHTML = section.products.map(product => {
+            const imageAlt = product.imageAlt || `${product.name} perfume`;
+            const description = product.description ||
+                `${product.name} is a ${String(product.category).toLowerCase()} fragrance with a balanced blend of fresh, inviting notes. Its smooth, long-lasting scent is made for everyday wear and special moments.`;
+            const productInfo = `
+                <h3>${escapeHtml(product.name)}</h3>
+                <p class="price">$${product.price.toFixed(2)}</p>
+                <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+            `;
+            const productContent = productDetailDialog
+                ? `<button type="button" class="product-detail-trigger" data-name="${escapeHtml(product.name)}"
+                    data-category="${escapeHtml(product.category)}" data-price="${product.price}"
+                    data-image="${escapeHtml(product.image)}" data-image-alt="${escapeHtml(imageAlt)}"
+                    data-description="${escapeHtml(description)}" aria-label="View details for ${escapeHtml(product.name)}">
+                    <img src="${escapeHtml(product.image)}" alt="${escapeHtml(imageAlt)}" loading="lazy">
+                    <span class="product-info">${productInfo}</span>
+                </button>
+                <button class="add-to-cart" data-name="${escapeHtml(product.name)}" data-price="${product.price}">🛒 ADD TO CART</button>`
+                : `<img src="${escapeHtml(product.image)}" alt="${escapeHtml(imageAlt)}" loading="lazy">
+                <div class="product-info">${productInfo}
                     <button class="add-to-cart" data-name="${escapeHtml(product.name)}" data-price="${product.price}">🛒 ADD TO CART</button>
-                </div>
-            </article>
-        `).join("");
+                </div>`;
+
+            return `<article class="product-card" data-category="${escapeHtml(product.category)}">${productContent}</article>`;
+        }).join("");
     });
 }
 
@@ -141,6 +168,71 @@ function setCartOpen(isOpen) {
 }
 
 renderCart();
+
+function setProductDetailOpen(isOpen, restoreFocus = true) {
+    if (!productDetailBackdrop || !productDetailDialog) return;
+
+    productDetailBackdrop.hidden = !isOpen;
+    document.body.classList.toggle("product-detail-open", isOpen);
+
+    if (isOpen) {
+        productDetailCloseButton?.focus();
+    } else if (restoreFocus) {
+        activeProductTrigger?.focus();
+    }
+}
+
+function openProductDetails(trigger) {
+    if (!productDetailDialog || !productDetailBackdrop) return;
+
+    const product = {
+        name: trigger.dataset.name,
+        category: trigger.dataset.category,
+        price: Number(trigger.dataset.price),
+        image: trigger.dataset.image,
+        imageAlt: trigger.dataset.imageAlt,
+        description: trigger.dataset.description
+    };
+
+    if (!product.name || !Number.isFinite(product.price) || product.price < 0) {
+        console.error("Product details require a name and non-negative price.");
+        return;
+    }
+
+    activeProductTrigger = trigger;
+    selectedProduct = product;
+    productDetailTitle.textContent = product.name;
+    productDetailCategory.textContent = product.category;
+    productDetailPrice.textContent = `$${product.price.toFixed(2)}`;
+    productDetailDescription.textContent = product.description;
+    productDetailImage.src = product.image;
+    productDetailImage.alt = product.imageAlt;
+    productQuantity.value = "1";
+    productQuantity.textContent = "1";
+    setProductDetailOpen(true);
+}
+
+document.addEventListener("click", event => {
+    const trigger = event.target.closest(".product-detail-trigger");
+    if (trigger) openProductDetails(trigger);
+});
+
+productDetailCloseButton?.addEventListener("click", () => setProductDetailOpen(false));
+productDetailBackdrop?.addEventListener("click", event => {
+    if (event.target === productDetailBackdrop) setProductDetailOpen(false);
+});
+
+document.getElementById("product-quantity-decrease")?.addEventListener("click", () => {
+    const quantity = Number(productQuantity.value) || 1;
+    productQuantity.value = String(Math.max(1, quantity - 1));
+    productQuantity.textContent = productQuantity.value;
+});
+
+document.getElementById("product-quantity-increase")?.addEventListener("click", () => {
+    const quantity = Number(productQuantity.value) || 1;
+    productQuantity.value = String(quantity + 1);
+    productQuantity.textContent = productQuantity.value;
+});
 
 // FILTER PRODUCTS BY CATEGORY
 categoryButtons.forEach(button => {
@@ -205,13 +297,16 @@ document.addEventListener("click", event => {
 
     const name = button.dataset.name;
     const price = Number(button.dataset.price);
+    const quantity = Number(button.dataset.quantity) || 1;
 
-    if (!name || !Number.isFinite(price) || price < 0) {
-        console.error("Add-to-cart button requires a product name and non-negative price.");
+    if (!name || !Number.isFinite(price) || price < 0 || !Number.isInteger(quantity) || quantity < 1) {
+        console.error("Add-to-cart button requires a product name, non-negative price, and positive whole-number quantity.");
         return;
     }
 
-    cart.push({ name, price });
+    for (let count = 0; count < quantity; count++) {
+        cart.push({ name, price });
+    }
     renderCart();
 
     const originalText = button.textContent;
@@ -220,6 +315,42 @@ document.addEventListener("click", event => {
     setTimeout(() => {
         button.textContent = originalText;
     }, 1000);
+});
+
+productDetailAddButton?.addEventListener("click", () => {
+    if (!selectedProduct) return;
+
+    const quantity = Number(productQuantity.value);
+    if (!Number.isInteger(quantity) || quantity < 1) {
+        console.error("Product quantity must be a positive whole number.");
+        return;
+    }
+
+    for (let count = 0; count < quantity; count++) {
+        cart.push({ name: selectedProduct.name, price: selectedProduct.price });
+    }
+    renderCart();
+    productDetailAddButton.textContent = "✓ Added to cart";
+    window.setTimeout(() => {
+        productDetailAddButton.textContent = "🛒 Add to cart";
+    }, 1000);
+});
+
+productDetailBuyButton?.addEventListener("click", () => {
+    if (!selectedProduct) return;
+
+    const quantity = Number(productQuantity.value);
+    if (!Number.isInteger(quantity) || quantity < 1) {
+        console.error("Product quantity must be a positive whole number.");
+        return;
+    }
+
+    for (let count = 0; count < quantity; count++) {
+        cart.push({ name: selectedProduct.name, price: selectedProduct.price });
+    }
+    renderCart();
+    setProductDetailOpen(false, false);
+    setCartOpen(true);
 });
 
 // SEARCH
@@ -270,6 +401,25 @@ cartItems?.addEventListener("click", event => {
 });
 
 document.addEventListener("keydown", event => {
+    if (productDetailBackdrop && !productDetailBackdrop.hidden) {
+        if (event.key === "Escape") {
+            setProductDetailOpen(false);
+        } else if (event.key === "Tab") {
+            const focusableElements = [...productDetailDialog.querySelectorAll("button:not(:disabled)")];
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (event.shiftKey && document.activeElement === firstElement) {
+                event.preventDefault();
+                lastElement.focus();
+            } else if (!event.shiftKey && document.activeElement === lastElement) {
+                event.preventDefault();
+                firstElement.focus();
+            }
+        }
+        return;
+    }
+
     if (!cartDrawer || cartDrawer.hidden) return;
 
     if (event.key === "Escape") {
