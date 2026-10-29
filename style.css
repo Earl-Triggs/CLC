@@ -47,6 +47,7 @@ a {
 .navbar {
     width: 100%;
     min-height: 68px;
+    height: 68px;
     position: relative;
     z-index: 2;
     background: #a780ac;
@@ -58,16 +59,22 @@ a {
     box-sizing: border-box;
 }
 
+.logo,
+.navbar-brand-logo,
+.logo-circle-badge {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+}
+
 .logo {
     background: #f4e8f5;
     border: 2px solid #eee1ef;
-    width: 60px;
-    height: 60px;
     border-radius: 50%;
     display: grid;
     place-items: center;
-    flex-shrink: 0;
     overflow: hidden;
+    margin-left: 0;
 }
 
 .logo img {

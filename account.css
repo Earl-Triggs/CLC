@@ -14,8 +14,9 @@
 }
 
 .account-navbar {
-    min-height: 61px;
-    padding: 3px 24px 3px 2px;
+    min-height: 68px;
+    height: 68px;
+    padding: 0 24px;
     gap: 16px;
 }
 
@@ -23,7 +24,6 @@
     width: 52px;
     height: 52px;
     border-width: 1px;
-    font-size: 19px;
 }
 
 .account-navbar h1 {
