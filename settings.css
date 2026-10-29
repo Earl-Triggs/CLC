@@ -21,7 +21,7 @@
 }
 
 .settings-main::before {
-    background-image: url("https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?auto=format&fit=crop&w=1800&q=85");
+    background-image: url("CLC images/Home and Kids/Promo Image.png");
     background-position: center;
     filter: blur(1px) saturate(1.35);
 }

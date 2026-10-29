@@ -1127,7 +1127,7 @@ body.faq-body {
 /* Main FAQ Content with Blossoms Background */
 .faq-main-wrapper {
   flex: 1;
-  background-image: url('assets/blossoms-bg.jpg');
+  background-image: url("CLC images/Home and Kids/Promo Image.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

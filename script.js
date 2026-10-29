@@ -1,22 +1,9 @@
 ﻿(() => {
     const defaultProducts = [
-        { name: "Hollister SoCal", price: 15.50, category: "Kids", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=500&q=80" },
-        { name: "Solitaire", price: 17.46, category: "Women", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=500&q=80" },
-        { name: "Jasmine Noir", price: 13.25, category: "Women", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=500&q=80" },
-        { name: "Nocturne", price: 19.90, category: "Men", image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=500&q=80" },
-        { name: "MissMo?", price: 60.55, category: "Women", image: "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=500&q=80" },
-        { name: "One Man's Chance", price: 18.00, category: "Men", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=500&q=80" },
-        { name: "Memories", price: 30.00, category: "Unisex", image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=500&q=80" },
-        { name: "Lumière", price: 16.00, category: "Women", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=500&q=80" },
-        { name: "Solara", price: 20.99, category: "Women", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=500&q=80" },
-        { name: "Aqualis", price: 19.25, category: "Men", image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=500&q=80" },
-        { name: "Verité", price: 18.50, category: "Unisex", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=500&q=80" },
-        { name: "Éclat", price: 20.99, category: "Women", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=500&q=80" },
-        { name: "Valora", price: 25.00, category: "Women", image: "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=500&q=80" },
-        { name: "Talon", price: 17.50, category: "Men", image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=500&q=80" },
-        { name: "Enmer", price: 21.00, category: "Unisex", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=500&q=80" },
-        { name: "Ember", price: 21.00, category: "Men", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=500&q=80" },
-        { name: "Amber Oud", price: 21.00, category: "Men", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=500&q=80" }
+        { name: "Helianthus de Soie", price: 20.15, category: "Women", image: "CLC images/Home and Kids/HP Bottom Image 1.png" },
+        { name: "Jasmine Noire", price: 16.49, category: "Women", image: "CLC images/Home and Kids/HP Bottom Image 2.png" },
+        { name: "Dahlia Eternelle", price: 18.98, category: "Men", image: "CLC images/Men/HP Bottom Image 6.png" },
+        { name: "6PAX", price: 17.23, category: "Men", image: "CLC images/Men/HP Bottom Image 7.png" }
     ];
 
     const products = window.CLC_PRODUCTS || defaultProducts;
@@ -159,7 +146,7 @@
         cartItems.innerHTML = cart.map((item, index) => `
             <article class="cart-item">
                 <div class="cart-item-main">
-                    <img class="cart-item-image" src="${escapeHtml(item.image || "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=500&q=80")}" alt="${escapeHtml(item.name)} perfume" loading="lazy">
+                    <img class="cart-item-image" src="${escapeHtml(item.image || "CLC images/Home and Kids/HP Bottom Image 1.png")}" alt="${escapeHtml(item.name)} perfume" loading="lazy">
                     <div class="cart-item-details">
                         <p class="cart-item-name">${escapeHtml(item.name)}</p>
                         <p class="cart-item-price">$${item.price.toFixed(2)} each</p>

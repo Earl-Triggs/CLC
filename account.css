@@ -97,7 +97,7 @@
 }
 
 .account-main::before {
-    background: url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1800&q=85")
+    background: url("CLC images/contact page/Page Background.png")
         center 48% / cover no-repeat;
     filter: blur(2px) saturate(0.35);
     transform: scale(1.02);

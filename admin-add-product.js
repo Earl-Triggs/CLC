@@ -110,7 +110,7 @@
             retailPrice,
             category,
             stock,
-            image: selectedImage || "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=500&q=80",
+            image: selectedImage || "CLC images/Home and Kids/HP Bottom Image 1.png",
             barcode: String(data.get("barcode")).trim(),
             brand: String(data.get("brand")).trim(),
             sku: String(data.get("sku")).trim(),
