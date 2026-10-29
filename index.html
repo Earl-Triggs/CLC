@@ -176,6 +176,40 @@
         </div>
     </aside>
 
+    <div class="product-detail-backdrop" id="product-detail-backdrop" hidden>
+        <section class="product-detail-dialog" id="product-detail-dialog" role="dialog" aria-modal="true"
+            aria-labelledby="product-detail-title" aria-describedby="product-detail-description" tabindex="-1">
+            <button type="button" class="product-detail-close" id="product-detail-close"
+                aria-label="Close product details">&times;</button>
+            <div class="product-detail-image-wrap">
+                <img id="product-detail-image" src="" alt="">
+            </div>
+            <div class="product-detail-content">
+                <div>
+                    <p class="product-detail-category" id="product-detail-category"></p>
+                    <h2 id="product-detail-title"></h2>
+                    <p class="product-detail-price" id="product-detail-price"></p>
+                    <p class="product-detail-stars" aria-label="5 out of 5 stars">★★★★★</p>
+                    <p class="product-detail-description" id="product-detail-description"></p>
+                </div>
+                <div class="product-detail-actions">
+                    <div class="product-detail-quantity">
+                        <span>Quantity</span>
+                        <div>
+                            <button type="button" id="product-quantity-decrease" aria-label="Decrease quantity">−</button>
+                            <output id="product-quantity" aria-live="polite">1</output>
+                            <button type="button" id="product-quantity-increase" aria-label="Increase quantity">+</button>
+                        </div>
+                    </div>
+                    <div class="product-detail-buttons">
+                        <button type="button" class="product-detail-add" id="product-detail-add">🛒 Add to cart</button>
+                        <button type="button" class="product-detail-buy" id="product-detail-buy">Buy now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <script src="script.js"></script>
 </body>
 

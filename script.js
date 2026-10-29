@@ -43,26 +43,6 @@ const cartButton = document.getElementById("cart-btn");
 const cartCloseButton = document.getElementById("cart-close");
 const cartStorageKey = "clc-cart-v1";
 
-function normalizeCartItem(item) {
-    if (!item || typeof item.name !== "string" || !item.name.trim()) {
-        return null;
-    }
-
-    const price = Number(item.price);
-    const quantity = Number(item.quantity);
-
-    if (!Number.isFinite(price) || price < 0) {
-        return null;
-    }
-
-    return {
-        name: item.name.trim(),
-        price,
-        image: typeof item.image === "string" ? item.image : "",
-        quantity: Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1
-    };
-}
-
 function loadCart() {
     try {
         const savedCart = JSON.parse(localStorage.getItem(cartStorageKey) || "[]");
@@ -104,7 +84,7 @@ function renderProducts() {
                     <h3>${escapeHtml(product.name)}</h3>
                     <p class="price">$${product.price.toFixed(2)}</p>
                     <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
-                    <button class="add-to-cart" data-name="${escapeHtml(product.name)}" data-price="${product.price}" data-image="${escapeHtml(product.image)}">🛒 ADD TO CART</button>
+                    <button class="add-to-cart" data-name="${escapeHtml(product.name)}" data-price="${product.price}">🛒 ADD TO CART</button>
                 </div>
             </article>
         `).join("");
@@ -183,6 +163,71 @@ function setCartOpen(isOpen) {
 
 renderCart();
 
+function setProductDetailOpen(isOpen, restoreFocus = true) {
+    if (!productDetailBackdrop || !productDetailDialog) return;
+
+    productDetailBackdrop.hidden = !isOpen;
+    document.body.classList.toggle("product-detail-open", isOpen);
+
+    if (isOpen) {
+        productDetailCloseButton?.focus();
+    } else if (restoreFocus) {
+        activeProductTrigger?.focus();
+    }
+}
+
+function openProductDetails(trigger) {
+    if (!productDetailDialog || !productDetailBackdrop) return;
+
+    const product = {
+        name: trigger.dataset.name,
+        category: trigger.dataset.category,
+        price: Number(trigger.dataset.price),
+        image: trigger.dataset.image,
+        imageAlt: trigger.dataset.imageAlt,
+        description: trigger.dataset.description
+    };
+
+    if (!product.name || !Number.isFinite(product.price) || product.price < 0) {
+        console.error("Product details require a name and non-negative price.");
+        return;
+    }
+
+    activeProductTrigger = trigger;
+    selectedProduct = product;
+    productDetailTitle.textContent = product.name;
+    productDetailCategory.textContent = product.category;
+    productDetailPrice.textContent = `$${product.price.toFixed(2)}`;
+    productDetailDescription.textContent = product.description;
+    productDetailImage.src = product.image;
+    productDetailImage.alt = product.imageAlt;
+    productQuantity.value = "1";
+    productQuantity.textContent = "1";
+    setProductDetailOpen(true);
+}
+
+document.addEventListener("click", event => {
+    const trigger = event.target.closest(".product-detail-trigger");
+    if (trigger) openProductDetails(trigger);
+});
+
+productDetailCloseButton?.addEventListener("click", () => setProductDetailOpen(false));
+productDetailBackdrop?.addEventListener("click", event => {
+    if (event.target === productDetailBackdrop) setProductDetailOpen(false);
+});
+
+document.getElementById("product-quantity-decrease")?.addEventListener("click", () => {
+    const quantity = Number(productQuantity.value) || 1;
+    productQuantity.value = String(Math.max(1, quantity - 1));
+    productQuantity.textContent = productQuantity.value;
+});
+
+document.getElementById("product-quantity-increase")?.addEventListener("click", () => {
+    const quantity = Number(productQuantity.value) || 1;
+    productQuantity.value = String(quantity + 1);
+    productQuantity.textContent = productQuantity.value;
+});
+
 // FILTER PRODUCTS BY CATEGORY
 categoryButtons.forEach(button => {
     button.classList.toggle("selected", button.dataset.category === selectedCategory);
@@ -246,20 +291,13 @@ document.addEventListener("click", event => {
 
     const name = button.dataset.name;
     const price = Number(button.dataset.price);
-    const image = button.dataset.image || button.closest(".product-card")?.querySelector("img")?.src || "";
 
-    if (!name || !Number.isFinite(price) || price < 0) {
-        console.error("Add-to-cart button requires a product name and non-negative price.");
+    if (!name || !Number.isFinite(price) || price < 0 || !Number.isInteger(quantity) || quantity < 1) {
+        console.error("Add-to-cart button requires a product name, non-negative price, and positive whole-number quantity.");
         return;
     }
 
-    const existingItem = cart.find(item => item.name === name);
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({ name, price, image, quantity: 1 });
-    }
-
+    cart.push({ name, price });
     renderCart();
 
     const originalText = button.textContent;
@@ -268,6 +306,42 @@ document.addEventListener("click", event => {
     setTimeout(() => {
         button.textContent = originalText;
     }, 1000);
+});
+
+productDetailAddButton?.addEventListener("click", () => {
+    if (!selectedProduct) return;
+
+    const quantity = Number(productQuantity.value);
+    if (!Number.isInteger(quantity) || quantity < 1) {
+        console.error("Product quantity must be a positive whole number.");
+        return;
+    }
+
+    for (let count = 0; count < quantity; count++) {
+        cart.push({ name: selectedProduct.name, price: selectedProduct.price });
+    }
+    renderCart();
+    productDetailAddButton.textContent = "✓ Added to cart";
+    window.setTimeout(() => {
+        productDetailAddButton.textContent = "🛒 Add to cart";
+    }, 1000);
+});
+
+productDetailBuyButton?.addEventListener("click", () => {
+    if (!selectedProduct) return;
+
+    const quantity = Number(productQuantity.value);
+    if (!Number.isInteger(quantity) || quantity < 1) {
+        console.error("Product quantity must be a positive whole number.");
+        return;
+    }
+
+    for (let count = 0; count < quantity; count++) {
+        cart.push({ name: selectedProduct.name, price: selectedProduct.price });
+    }
+    renderCart();
+    setProductDetailOpen(false, false);
+    setCartOpen(true);
 });
 
 // SEARCH
@@ -361,6 +435,25 @@ cartItems?.addEventListener("click", event => {
 });
 
 document.addEventListener("keydown", event => {
+    if (productDetailBackdrop && !productDetailBackdrop.hidden) {
+        if (event.key === "Escape") {
+            setProductDetailOpen(false);
+        } else if (event.key === "Tab") {
+            const focusableElements = [...productDetailDialog.querySelectorAll("button:not(:disabled)")];
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (event.shiftKey && document.activeElement === firstElement) {
+                event.preventDefault();
+                lastElement.focus();
+            } else if (!event.shiftKey && document.activeElement === lastElement) {
+                event.preventDefault();
+                firstElement.focus();
+            }
+        }
+        return;
+    }
+
     if (!cartDrawer || cartDrawer.hidden) return;
 
     if (event.key === "Escape") {
