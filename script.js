@@ -35,9 +35,33 @@ const cartBackdrop = document.getElementById("cart-backdrop");
 const cartItems = document.getElementById("cart-items");
 const cartItemCount = document.getElementById("cart-item-count");
 const cartSubtotal = document.getElementById("cart-subtotal");
+const cartItemsTotal = document.getElementById("cart-items-total");
+const cartShipping = document.getElementById("cart-shipping");
+const cartTax = document.getElementById("cart-tax");
+const cartTotal = document.getElementById("cart-total");
 const cartButton = document.getElementById("cart-btn");
 const cartCloseButton = document.getElementById("cart-close");
 const cartStorageKey = "clc-cart-v1";
+
+function normalizeCartItem(item) {
+    if (!item || typeof item.name !== "string" || !item.name.trim()) {
+        return null;
+    }
+
+    const price = Number(item.price);
+    const quantity = Number(item.quantity);
+
+    if (!Number.isFinite(price) || price < 0) {
+        return null;
+    }
+
+    return {
+        name: item.name.trim(),
+        price,
+        image: typeof item.image === "string" ? item.image : "",
+        quantity: Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1
+    };
+}
 
 function loadCart() {
     try {
@@ -47,12 +71,9 @@ function loadCart() {
             throw new TypeError("Saved cart data must be an array.");
         }
 
-        return savedCart.filter(item =>
-            item &&
-            typeof item.name === "string" &&
-            Number.isFinite(item.price) &&
-            item.price >= 0
-        );
+        return savedCart
+            .map(normalizeCartItem)
+            .filter(Boolean);
     } catch (error) {
         console.error("Could not load the saved cart.", error);
         return [];
@@ -83,7 +104,7 @@ function renderProducts() {
                     <h3>${escapeHtml(product.name)}</h3>
                     <p class="price">$${product.price.toFixed(2)}</p>
                     <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
-                    <button class="add-to-cart" data-name="${escapeHtml(product.name)}" data-price="${product.price}">🛒 ADD TO CART</button>
+                    <button class="add-to-cart" data-name="${escapeHtml(product.name)}" data-price="${product.price}" data-image="${escapeHtml(product.image)}">🛒 ADD TO CART</button>
                 </div>
             </article>
         `).join("");
@@ -93,11 +114,21 @@ function renderProducts() {
 renderProducts();
 
 function renderCart() {
-    if (cartCount) cartCount.textContent = cart.length;
-    if (cartItemCount) cartItemCount.textContent = `(${cart.length})`;
+    const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    if (cartSubtotal) cartSubtotal.textContent = `$${total.toFixed(2)}`;
+    if (cartCount) cartCount.textContent = totalQuantity;
+    if (cartItemCount) cartItemCount.textContent = `(${totalQuantity})`;
+
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const shipping = cart.length === 0 ? 0 : subtotal >= 75 ? 0 : 8.50;
+    const tax = subtotal * 0.08;
+    const total = subtotal + shipping + tax;
+
+    if (cartSubtotal) cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+    if (cartItemsTotal) cartItemsTotal.textContent = `$${subtotal.toFixed(2)}`;
+    if (cartShipping) cartShipping.textContent = `$${shipping.toFixed(2)}`;
+    if (cartTax) cartTax.textContent = `$${tax.toFixed(2)}`;
+    if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
 
     try {
         localStorage.setItem(cartStorageKey, JSON.stringify(cart));
@@ -114,12 +145,22 @@ function renderCart() {
 
     cartItems.innerHTML = cart.map((item, index) => `
         <article class="cart-item">
-            <div>
-                <p class="cart-item-name">${escapeHtml(item.name)}</p>
-                <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+            <div class="cart-item-main">
+                <img class="cart-item-image" src="${escapeHtml(item.image || "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=500&q=80")}" alt="${escapeHtml(item.name)} perfume" loading="lazy">
+                <div class="cart-item-details">
+                    <p class="cart-item-name">${escapeHtml(item.name)}</p>
+                    <p class="cart-item-price">$${item.price.toFixed(2)} each</p>
+                </div>
             </div>
-            <button type="button" class="cart-item-remove" data-cart-index="${index}"
-                aria-label="Remove ${escapeHtml(item.name)} from cart">Remove</button>
+            <div class="cart-item-actions">
+                <div class="quantity-control" aria-label="Quantity for ${escapeHtml(item.name)}">
+                    <button type="button" class="qty-btn" data-action="decrease" data-cart-index="${index}" aria-label="Decrease quantity for ${escapeHtml(item.name)}">−</button>
+                    <span class="qty-value">${item.quantity}</span>
+                    <button type="button" class="qty-btn" data-action="increase" data-cart-index="${index}" aria-label="Increase quantity for ${escapeHtml(item.name)}">+</button>
+                </div>
+                <button type="button" class="cart-item-remove" data-cart-index="${index}"
+                    aria-label="Remove ${escapeHtml(item.name)} from cart">Remove</button>
+            </div>
         </article>
     `).join("");
 }
@@ -205,13 +246,20 @@ document.addEventListener("click", event => {
 
     const name = button.dataset.name;
     const price = Number(button.dataset.price);
+    const image = button.dataset.image || button.closest(".product-card")?.querySelector("img")?.src || "";
 
     if (!name || !Number.isFinite(price) || price < 0) {
         console.error("Add-to-cart button requires a product name and non-negative price.");
         return;
     }
 
-    cart.push({ name, price });
+    const existingItem = cart.find(item => item.name === name);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ name, price, image, quantity: 1 });
+    }
+
     renderCart();
 
     const originalText = button.textContent;
@@ -284,6 +332,27 @@ cartCloseButton?.addEventListener("click", () => setCartOpen(false));
 cartBackdrop?.addEventListener("click", () => setCartOpen(false));
 
 cartItems?.addEventListener("click", event => {
+    const quantityButton = event.target.closest(".qty-btn");
+    if (quantityButton) {
+        const index = Number(quantityButton.dataset.cartIndex);
+        const action = quantityButton.dataset.action;
+
+        if (!Number.isInteger(index) || index < 0 || index >= cart.length) return;
+
+        const item = cart[index];
+        if (action === "increase") {
+            item.quantity += 1;
+        } else if (action === "decrease") {
+            item.quantity -= 1;
+            if (item.quantity <= 0) {
+                cart.splice(index, 1);
+            }
+        }
+
+        renderCart();
+        return;
+    }
+
     const removeButton = event.target.closest("[data-cart-index]");
     if (!removeButton) return;
 

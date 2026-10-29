@@ -19,7 +19,9 @@
         <!-- NAVIGATION -->
 
         <header class="navbar">
-            <a href="index.html" class="logo" aria-label="CLC home">CLC</a>
+            <a href="index.html" class="logo" aria-label="CLC home">
+                <img src="assets/logo-circle.png" alt="CLC logo">
+            </a>
 
             <nav class="nav-links" aria-label="Main navigation">
                 <a href="index.html" class="active" aria-current="page">Home</a>
@@ -40,7 +42,12 @@
 
             <div class="nav-icons">
                 <button id="cart-btn" aria-label="Shopping cart" aria-haspopup="dialog" aria-expanded="false">
-                    🛒 <span id="cart-count">0</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="9" cy="18" r="1.7"></circle>
+                        <circle cx="17" cy="18" r="1.7"></circle>
+                        <path d="M3 4h2l2.2 10.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 .98-.8L20 7H7"></path>
+                    </svg>
+                    <span id="cart-count">0</span>
                 </button>
                 <div class="account-menu-wrapper">
                     <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true"
@@ -155,6 +162,12 @@
         </div>
         <div class="cart-items" id="cart-items" aria-live="polite"></div>
         <div class="cart-drawer-footer">
+            <div class="cart-breakdown" aria-label="Cart breakdown">
+                <div class="cart-line"><span>Items</span><strong id="cart-items-total">$0.00</strong></div>
+                <div class="cart-line"><span>Shipping</span><strong id="cart-shipping">$0.00</strong></div>
+                <div class="cart-line"><span>Estimated tax</span><strong id="cart-tax">$0.00</strong></div>
+                <div class="cart-line cart-total"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+            </div>
             <div class="cart-subtotal">
                 <span>Subtotal</span>
                 <strong id="cart-subtotal">$0.00</strong>
