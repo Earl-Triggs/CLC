@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about CLC and our passion for helping everyone find a fragrance they love.">
+    <title>About Us | CLC Perfume Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="about.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="about-page">
+    <div class="site-container">
+        <header class="navbar">
+            <a href="index.html" class="logo" aria-label="CLC home">CLC</a>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="kids-shop.html">Shop</a>
+                <a href="about.html" class="active" aria-current="page">About Us</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search perfumes..." aria-label="Search perfumes">
+                <button id="search-btn" aria-label="Open search" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="10.8" cy="10.8" r="7.3"></circle>
+                        <path d="m16.2 16.2 5 5"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="nav-icons">
+                <button id="cart-btn" aria-label="Shopping cart" aria-haspopup="dialog" aria-expanded="false">
+                    🛒 <span id="cart-count">0</span>
+                </button>
+                <div class="account-menu-wrapper">
+                    <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true"
+                        aria-expanded="false" aria-controls="account-menu">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="3.5"></circle>
+                            <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                        </svg>
+                    </button>
+                    <div class="account-menu" id="account-menu" role="menu" aria-label="Account options" hidden>
+                        <p class="account-menu-heading" role="presentation">YOUR ACCOUNT</p>
+                        <a href="account.html" role="menuitem">Account</a>
+                        <a href="settings.html" role="menuitem">Settings</a>
+                        <a href="help.html" role="menuitem">Help</a>
+                        <hr role="separator">
+                        <button type="button" role="menuitem" data-action="logout">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="about-main">
+            <article class="about-card" aria-labelledby="about-title">
+                <h1 id="about-title">About Us</h1>
+                <div class="about-copy">
+                    <p>Welcome to CLC, your destination for fragrances that express your unique style and personality. We offer a wide selection of perfumes for men, women, kids, and unisex preferences, making it easy for everyone to find a scent they love.</p>
+                    <p>At CLC, we believe that every fragrance tells a story. Whether you prefer something fresh and light, sweet and playful, or bold and captivating, we aim to bring you scents for every mood, occasion, and moment in life.</p>
+                    <p>Our mission is to make finding your perfect fragrance simple, enjoyable, and accessible. With CLC, discover a scent that reflects who you are and leaves a lasting impression.</p>
+                    <p class="about-signoff">CLC – Your Scent, Your Story.</p>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>© 2026 CLC. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <div class="cart-backdrop" id="cart-backdrop" hidden></div>
+    <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true"
+        aria-labelledby="cart-title" aria-hidden="true" hidden>
+        <div class="cart-drawer-header">
+            <h2 id="cart-title">Your Cart <span id="cart-item-count">(0)</span></h2>
+            <button type="button" class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items" aria-live="polite"></div>
+        <div class="cart-drawer-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <strong id="cart-subtotal">$0.00</strong>
+            </div>
+            <p>Checkout is not connected in this demo.</p>
+        </div>
+    </aside>
+    <script src="script.js"></script>
+</body>
+
+</html>
