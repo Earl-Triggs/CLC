@@ -33,7 +33,7 @@
             if (!Array.isArray(parsedProducts) || !parsedProducts.every(isProduct)) {
                 throw new TypeError("Saved product data is invalid.");
             }
-            return parsedProducts;
+            return window.CLC_ADMIN_MERGE_STOREFRONT_PRODUCTS(parsedProducts);
         } catch (error) {
             console.error("Could not load admin products.", error);
             return starterProducts.map(product => ({ ...product }));
@@ -71,7 +71,7 @@
         name.textContent = product.name;
         const price = document.createElement("p");
         price.className = "admin-product-price";
-        price.textContent = `$${(product.retailPrice ?? product.price).toFixed(2)}`;
+        price.textContent = window.CLC_CURRENCY.format(product.retailPrice ?? product.price);
         const rating = document.createElement("p");
         rating.className = "admin-product-rating";
         rating.setAttribute("aria-label", "4 out of 5 stars");

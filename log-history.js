@@ -1,27 +1,10 @@
 (() => {
-    const loginHistory = [
-        ["2026001", "Chen", "2026-10-28T14:42:00"],
-        ["2026002", "Triggs", "2026-10-28T14:25:00"],
-        ["2026003", "Zhini", "2026-10-28T14:03:00"],
-        ["2026004", "Vegh", "2026-10-28T13:51:00"],
-        ["2026005", "Kyle", "2026-10-28T13:34:00"],
-        ["2026006", "Zukiny", "2026-10-28T13:12:00"],
-        ["2026007", "Inume", "2026-10-28T12:56:00"],
-        ["2026008", "AJ", "2026-10-28T12:31:00"],
-        ["2026009", "Ashiru", "2026-10-28T12:15:00"],
-        ["2026010", "Zephyr", "2026-10-28T11:48:00"],
-        ["2026011", "Illoai", "2026-10-28T11:20:00"],
-        ["2026012", "Mercy", "2026-10-28T10:52:00"],
-        ["2026013", "Sigma", "2026-10-28T10:26:00"],
-        ["2026014", "Calichen", "2026-10-28T09:58:00"],
-        ["2026015", "Yeheno", "2026-10-28T09:24:00"],
-        ["2026016", "Thragg", "2026-10-28T08:47:00"],
-        ["2026017", "Nyx", "2026-10-28T08:15:00"],
-        ["2026018", "Elowen", "2026-10-28T07:50:00"],
-        ["2026019", "Amari", "2026-10-28T07:25:00"],
-        ["2026020", "Noor", "2026-10-28T07:05:00"]
-    ].map(([id, username, loginTime]) => ({ id, username, loginTime }));
-
+    const storageKey = "clc-login-history-v1";
+    const sampleUsers = [
+        "Chen", "Triggs", "Zhini", "Vegh", "Kyle", "Zukiny", "Inume", "AJ",
+        "Ashiru", "Zephyr", "Illoai", "Mercy", "Sigma", "Calichen", "Yeheno",
+        "Thragg", "Nyx", "Elowen", "Amari", "Noor"
+    ];
     const searchInput = document.getElementById("login-search");
     const timeSort = document.getElementById("login-time-sort");
     const usernameSort = document.getElementById("login-username-sort");
@@ -31,6 +14,51 @@
         dateStyle: "medium",
         timeStyle: "short"
     });
+    let loginHistory = [];
+
+    function createDemoHistory() {
+        const now = new Date();
+        return sampleUsers.map((username, index) => {
+            const loginTime = new Date(now.getTime() - (index * 97 + 12) * 60 * 1000);
+            return {
+                id: `DEMO-LOGIN-${now.getFullYear()}-${String(index + 1).padStart(4, "0")}`,
+                username,
+                loginTime: loginTime.toISOString()
+            };
+        });
+    }
+
+    function isValidEntry(entry) {
+        return entry &&
+            typeof entry.id === "string" &&
+            typeof entry.username === "string" &&
+            entry.username.trim().length > 0 &&
+            typeof entry.loginTime === "string" &&
+            Number.isFinite(Date.parse(entry.loginTime));
+    }
+
+    function loadSavedHistory() {
+        try {
+            const savedHistory = localStorage.getItem(storageKey);
+            if (savedHistory === null) return [];
+            const parsedHistory = JSON.parse(savedHistory);
+            if (!Array.isArray(parsedHistory) || !parsedHistory.every(isValidEntry)) {
+                throw new TypeError("Saved login history data is invalid.");
+            }
+            return parsedHistory;
+        } catch (error) {
+            console.error("Could not load login history.", error);
+            return [];
+        }
+    }
+
+    function loadHistory() {
+        const entriesById = new Map();
+        [...createDemoHistory(), ...loadSavedHistory()].forEach(entry => {
+            entriesById.set(entry.id, entry);
+        });
+        return [...entriesById.values()];
+    }
 
     function createCell(text) {
         const cell = document.createElement("td");
@@ -65,9 +93,21 @@
         emptyMessage.hidden = visibleEntries.length > 0;
     }
 
+    function refreshHistory() {
+        loginHistory = loadHistory();
+        renderHistory();
+    }
+
     [searchInput, timeSort, usernameSort].forEach(control => {
         control.addEventListener("input", renderHistory);
         control.addEventListener("change", renderHistory);
     });
-    renderHistory();
+
+    window.addEventListener("storage", event => {
+        if (event.key === storageKey || event.key === null) {
+            refreshHistory();
+        }
+    });
+
+    refreshHistory();
 })();

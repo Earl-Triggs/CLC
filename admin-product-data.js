@@ -1,15 +1,56 @@
-window.CLC_ADMIN_PRODUCT_STORAGE_KEY = "clc-admin-products-v1";
-window.CLC_ADMIN_STARTER_PRODUCTS = [
-    { id: "gumdrop", name: "Gumdrop", price: 7.38, category: "Kids", stock: 10000, image: "CLC images/Home and Kids/HP Bottom Image 12.png" },
-    { id: "sweet-hive", name: "Sweet Hive", price: 8.41, category: "Kids", stock: 10000, image: "CLC images/Home and Kids/HP Bottom Image 10.png" },
-    { id: "barbie", name: "Barbie", price: 7.38, category: "Kids", stock: 10000, image: "CLC images/Home and Kids/HP Bottom Image 18.png" },
-    { id: "winx-club", name: "Winx Club", price: 8.41, category: "Kids", stock: 10000, image: "CLC images/Home and Kids/HP Bottom Image 16.png" },
-    { id: "calotine-rose", name: "Calotine Rose", price: 7.38, category: "Kids", stock: 10000, image: "CLC images/Home and Kids/HP Bottom Image 15.png" },
-    { id: "flower-knows", name: "Flower Knows", price: 8.41, category: "Kids", stock: 10000, image: "CLC images/Home and Kids/HP Bottom Image 13.png" },
-    { id: "descendants", name: "Descendants", price: 4.97, category: "Kids", stock: 10000, image: "CLC images/Home and Kids/HP Bottom Image 17.png" },
-    { id: "little-princess", name: "Little Princess", price: 4.97, category: "Kids", stock: 10000, image: "CLC images/Home and Kids/image 19.png" },
-    { id: "tiny-bear", name: "Tiny Bear", price: 7.38, category: "Kids", stock: 10000, image: "CLC images/Home and Kids/image 20.png" },
-    { id: "sunny-petals", name: "Sunny Petals", price: 8.41, category: "Kids", stock: 10000, image: "CLC images/Home and Kids/image 21.png" },
-    { id: "unicorn-dreams", name: "Unicorn Dreams", price: 4.97, category: "Kids", stock: 10000, image: "CLC images/Home and Kids/image 22.png" },
-    { id: "ocean-star", name: "Ocean Star", price: 4.97, category: "Kids", stock: 10000, image: "CLC images/Home and Kids/image 23.png" }
-];
+(() => {
+    window.CLC_ADMIN_PRODUCT_STORAGE_KEY = "clc-admin-products-v1";
+    const categoryCatalogs = window.CLC_PRODUCT_CATALOGS;
+    const kidsProducts = window.CLC_PRODUCTS;
+    const catalogCategories = ["Men", "Women", "Unisex"];
+
+    if (!Array.isArray(kidsProducts) || !categoryCatalogs ||
+        catalogCategories.some(category => !Array.isArray(categoryCatalogs[category]))) {
+        throw new Error("Storefront product catalogs must load before admin product data.");
+    }
+
+    function createProductSlug(name) {
+        return name.normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "");
+    }
+
+    const storefrontProducts = [
+        ...kidsProducts,
+        ...catalogCategories.flatMap(category => categoryCatalogs[category])
+    ];
+    const productIdCounts = new Map();
+
+    window.CLC_ADMIN_STARTER_PRODUCTS = storefrontProducts.map(product => {
+        const categorySlug = product.category.toLowerCase();
+        const nameSlug = createProductSlug(product.name);
+        const baseId = product.category === "Kids" ? nameSlug : `${categorySlug}-${nameSlug}`;
+        const occurrence = (productIdCounts.get(baseId) || 0) + 1;
+        productIdCounts.set(baseId, occurrence);
+
+        return {
+            id: occurrence === 1 ? baseId : `${baseId}-${occurrence}`,
+            name: product.name,
+            price: product.price,
+            category: product.category,
+            stock: 10000,
+            image: product.image || ""
+        };
+    });
+
+    window.CLC_ADMIN_MERGE_STOREFRONT_PRODUCTS = savedProducts => {
+        const savedById = new Map(savedProducts.map(product => [product.id, product]));
+        const starterIds = new Set(window.CLC_ADMIN_STARTER_PRODUCTS.map(product => product.id));
+        const storefrontProductsWithSavedValues = window.CLC_ADMIN_STARTER_PRODUCTS.map(product => {
+            const savedProduct = savedById.get(product.id);
+            return savedProduct
+                ? { ...savedProduct, category: product.category }
+                : { ...product };
+        });
+        const customProducts = savedProducts.filter(product => !starterIds.has(product.id));
+
+        return [...storefrontProductsWithSavedValues, ...customProducts];
+    };
+})();

@@ -118,6 +118,7 @@
 }
 .checkout-summary { padding: 12px 0 6px; }
 .checkout-summary h3 { margin-bottom: 10px; font-size: 12px; }
+.currency-rate-note { margin: -5px 0 10px; color: #777; font-size: 10px; }
 .summary-line { display: flex; justify-content: space-between; gap: 12px; margin: 5px 0; font-size: 12px; }
 .summary-line strong { white-space: nowrap; }
 .discount-line { color: #4b9252; }

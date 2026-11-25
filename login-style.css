@@ -378,6 +378,28 @@ body.signup-page {
   color: #111111;
 }
 
+.admin-access {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.admin-access a {
+  display: inline-block;
+  padding: 6px;
+  color: #747474;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.admin-access a:hover,
+.admin-access a:focus-visible {
+  color: var(--color-heading);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* ==========================================================================
    Right Column: Hero Visual Panel (Login Page Default)
    ========================================================================== */

@@ -11,24 +11,30 @@
 }
 
 .dashboard-sidebar {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
     min-width: 0;
+    overflow-y: auto;
     background: #a780ac;
     color: #fff;
 }
 
 .dashboard-logo {
-    display: grid;
+    display: block;
     width: 64px;
     height: 64px;
     margin: 4px 0 20px 2px;
-    border: 2px solid #eee1ef;
     border-radius: 50%;
-    background: #f4e8f5;
-    color: #513d55;
-    font-family: "Playfair Display", serif;
-    font-size: 23px;
-    font-weight: 700;
-    place-items: center;
+    overflow: hidden;
+}
+
+.dashboard-logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .dashboard-navigation {
@@ -165,6 +171,12 @@
     white-space: nowrap;
 }
 
+.dashboard-demo-note {
+    margin: 6px 0 0;
+    color: #777;
+    font-size: 9px;
+}
+
 .performance-panel {
     margin-top: 9px;
     padding: 10px 17px 12px;
@@ -214,10 +226,19 @@
     padding: 0 0 12px;
 }
 
+.chart-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
 .chart-legend {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px 12px;
     color: #555;
     font-size: 9px;
 }
@@ -249,10 +270,49 @@
     color: #f39a17;
 }
 
+.chart-range-controls {
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 3px;
+    padding: 3px;
+    border: 1px solid #d0d0d0;
+    border-radius: 999px;
+    background: #fff;
+}
+
+.chart-range-controls button {
+    padding: 5px 9px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #555;
+    font: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.chart-range-controls button:hover,
+.chart-range-controls button[aria-pressed="true"] {
+    background: #795b7e;
+    color: #fff;
+}
+
+.chart-range-controls button:focus-visible {
+    outline: 2px solid #4c67ff;
+    outline-offset: 2px;
+}
+
+.chart-plot {
+    position: relative;
+    min-width: 0;
+}
+
 .performance-chart {
     display: block;
     width: 100%;
     overflow: visible;
+    touch-action: pan-y;
 }
 
 .chart-grid path {
@@ -283,6 +343,8 @@
 .chart-line {
     fill: none;
     stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .revenue-line {
@@ -313,6 +375,66 @@
 .purchase-points {
     fill: #f39a17;
     stroke: #f39a17;
+}
+
+#chart-points .chart-active-point {
+    stroke: #fff;
+    stroke-width: 2;
+}
+
+.chart-tooltip[hidden] {
+    display: none;
+}
+
+.chart-tooltip {
+    position: absolute;
+    z-index: 1;
+    display: grid;
+    min-width: 150px;
+    gap: 5px;
+    padding: 9px 11px;
+    border: 1px solid #dedbe0;
+    border-radius: 9px;
+    background: #fff;
+    box-shadow: 0 4px 14px #0002;
+    color: #292329;
+    font-size: 10px;
+    pointer-events: none;
+}
+
+.chart-tooltip-date {
+    margin-bottom: 2px;
+    font-weight: 700;
+}
+
+.chart-tooltip-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.chart-tooltip-row strong {
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+}
+
+.chart-tooltip-dot {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 8px;
+    border-radius: 50%;
+}
+
+.chart-tooltip-dot[data-series="revenue"] {
+    background: #4c67ff;
+}
+
+.chart-tooltip-dot[data-series="profit"] {
+    background: #00bf8a;
+}
+
+.chart-tooltip-dot[data-series="purchases"] {
+    background: #f39a17;
 }
 
 .chart-note {
@@ -363,19 +485,49 @@
     display: flex;
     min-height: 57px;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 
-.top-products-list li > span {
-    color: #c98d08;
-    font-family: Georgia, serif;
-    font-size: 32px;
+.top-product-rank {
+    display: inline-flex;
+    width: 30px;
+    flex: 0 0 30px;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: #a27a32;
+    font-size: 11px;
+    font-weight: 600;
     line-height: 1;
-    text-shadow: 0 1px #fff0b0;
+}
+
+.top-product-rank svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+}
+
+.top-product-rank span {
+    color: #51493c;
+}
+
+.top-products-list img {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
+    border: 1px solid #e7e5e3;
+    border-radius: 8px;
+    background: #fff;
+    object-fit: contain;
 }
 
 .top-products-list p {
     font-size: 11px;
+    font-weight: 600;
 }
 
 @media (max-width: 1050px) {
@@ -417,9 +569,13 @@
     }
 
     .dashboard-sidebar {
+        z-index: 5;
         display: flex;
+        height: auto;
         align-items: center;
         gap: 12px;
+        overflow-x: auto;
+        overflow-y: hidden;
         padding: 6px 12px;
     }
 
@@ -428,7 +584,6 @@
         height: 44px;
         flex: 0 0 44px;
         margin: 0;
-        font-size: 17px;
     }
 
     .dashboard-navigation {
@@ -497,6 +652,15 @@
         flex-wrap: wrap;
         gap: 6px;
         font-size: 8px;
+    }
+
+    .chart-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .chart-range-controls {
+        align-self: center;
     }
 
     .chart-legend i {

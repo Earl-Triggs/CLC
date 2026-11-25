@@ -1,5 +1,11 @@
 (() => {
     const cartKey = "clc-cart-v1";
+    const currencyFormatter = new Intl.NumberFormat("en-PH", {
+        style: "currency",
+        currency: "PHP",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
     const form = document.getElementById("checkout-form");
     const voucherInput = document.getElementById("voucher");
     const applyVoucherButton = document.getElementById("apply-voucher");
@@ -18,11 +24,15 @@
 
     const cart = readCart();
     const subtotal = cart.reduce((sum, item) => sum + Number(item.price) * Number(item.quantity), 0);
-    const shipping = cart.length === 0 ? 0 : subtotal >= 75 ? 0 : 8.5;
+    const shipping = cart.length === 0
+        ? 0
+        : subtotal >= window.CLC_CURRENCY.freeShippingThreshold
+            ? 0
+            : window.CLC_CURRENCY.standardShippingFee;
     const tax = subtotal * 0.08;
 
     function formatCurrency(value) {
-        return `$${value.toFixed(2)}`;
+        return currencyFormatter.format(value);
     }
 
     function renderSummary() {

@@ -67,36 +67,52 @@
         <main class="contact-main">
             <section class="contact-hero" aria-labelledby="contact-title">
                 <div class="contact-copy">
-                    <p class="contact-eyebrow">How can we help you?</p>
-                    <h1 id="contact-title">Contact Us</h1>
-                    <p class="contact-intro">We’re here to help and answer any questions you might have. We look forward
-                        to hearing from you!</p>
+                    <p class="contact-eyebrow">GET IN TOUCH</p>
+                    <h1 id="contact-title">Let’s talk.</h1>
+                    <p class="contact-intro">Need help with an order or finding your next favorite scent? We’re here for you.</p>
 
                     <address class="contact-details">
-                        <p>
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
-                                <circle cx="12" cy="10" r="2.5"></circle>
-                            </svg>
-                            <span>Cavite State University</span>
-                        </p>
-                        <p>
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 3a14 14 0 0 1-6-6l3-2-2-5Z"></path>
-                            </svg>
-                            <a href="tel:+186547862">+18 654 7862</a>
-                        </p>
-                        <p>
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <rect x="3" y="5" width="18" height="14" rx="1"></rect>
-                                <path d="m4 7 8 6 8-6"></path>
-                            </svg>
-                            <a href="mailto:Contactus@gmail.com">Contactus@gmail.com</a>
-                        </p>
+                        <a class="contact-detail" href="mailto:Contactus@gmail.com">
+                            <span class="contact-detail-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="3" y="5" width="18" height="14" rx="1"></rect>
+                                    <path d="m4 7 8 6 8-6"></path>
+                                </svg>
+                            </span>
+                            <span class="contact-detail-copy">
+                                <span class="contact-detail-label">Email</span>
+                                <span class="contact-detail-value">Contactus@gmail.com</span>
+                            </span>
+                        </a>
+                        <a class="contact-detail" href="tel:+186547862">
+                            <span class="contact-detail-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 3a14 14 0 0 1-6-6l3-2-2-5Z"></path>
+                                </svg>
+                            </span>
+                            <span class="contact-detail-copy">
+                                <span class="contact-detail-label">Phone</span>
+                                <span class="contact-detail-value">+18 654 7862</span>
+                            </span>
+                        </a>
+                        <div class="contact-detail">
+                            <span class="contact-detail-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+                                    <circle cx="12" cy="10" r="2.5"></circle>
+                                </svg>
+                            </span>
+                            <span class="contact-detail-copy">
+                                <span class="contact-detail-label">Location</span>
+                                <span class="contact-detail-value">Cavite State University</span>
+                            </span>
+                        </div>
                     </address>
                 </div>
 
-                <div class="contact-illustration" aria-hidden="true"></div>
+                <div class="contact-illustration" aria-hidden="true">
+                    <img src="assets/contact-bouquet.png" alt="">
+                </div>
             </section>
         </main>
 
@@ -115,12 +131,12 @@
         <div class="cart-items" id="cart-items" aria-live="polite"></div>
         <div class="cart-drawer-footer">
             <div class="cart-breakdown" aria-label="Cart breakdown">
-                <div class="cart-line"><span>Items</span><strong id="cart-items-total">$0.00</strong></div>
-                <div class="cart-line"><span>Shipping</span><strong id="cart-shipping">$0.00</strong></div>
-                <div class="cart-line"><span>Estimated tax</span><strong id="cart-tax">$0.00</strong></div>
-                <div class="cart-line cart-total"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+                <div class="cart-line"><span>Items</span><strong id="cart-items-total">&#8369;0.00</strong></div>
+                <div class="cart-line"><span>Shipping</span><strong id="cart-shipping">&#8369;0.00</strong></div>
+                <div class="cart-line"><span>Estimated tax</span><strong id="cart-tax">&#8369;0.00</strong></div>
+                <div class="cart-line cart-total"><span>Total</span><strong id="cart-total">&#8369;0.00</strong></div>
             </div>
-            <div class="cart-subtotal"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+            <div class="cart-subtotal"><span>Subtotal</span><strong id="cart-subtotal">&#8369;0.00</strong></div>
             <button type="button" class="cart-checkout-btn" id="cart-checkout-btn">CHECK OUT</button>
         </div>
     </aside>

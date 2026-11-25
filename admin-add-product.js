@@ -32,7 +32,7 @@
         if (!Array.isArray(parsedProducts) || !parsedProducts.every(isProduct)) {
             throw new TypeError("Saved admin product data is invalid.");
         }
-        return parsedProducts;
+        return window.CLC_ADMIN_MERGE_STOREFRONT_PRODUCTS(parsedProducts);
     }
 
     imageInput.addEventListener("change", () => {

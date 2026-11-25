@@ -1,5 +1,5 @@
 (() => {
-    const logs = window.CLC_INVENTORY_LOGS.load();
+    let logs = [];
     const searchInput = document.getElementById("inventory-search");
     const actionFilter = document.getElementById("inventory-action-filter");
     const dateSort = document.getElementById("inventory-date-sort");
@@ -76,16 +76,31 @@
         emptyMessage.hidden = visibleLogs.length > 0;
     }
 
-    document.getElementById("total-logs").textContent = String(logs.length);
-    document.getElementById("products-added").textContent =
-        String(logs.filter(log => log.action === "Added").length);
-    document.getElementById("inventory-items-sold").textContent =
-        String(logs.reduce((total, log) => total + log.soldUnits, 0));
+    function updateSummary() {
+        document.getElementById("total-logs").textContent = String(logs.length);
+        document.getElementById("products-added").textContent =
+            String(logs.filter(log => log.action === "Added").length);
+        document.getElementById("inventory-items-sold").textContent =
+            String(logs.reduce((total, log) => total + log.soldUnits, 0));
+    }
+
+    function refreshLogs() {
+        logs = window.CLC_INVENTORY_LOGS.load();
+        updateSummary();
+        renderLogs();
+    }
 
     [searchInput, actionFilter, dateSort, stockSort].forEach(control => {
         control.addEventListener("input", renderLogs);
         control.addEventListener("change", renderLogs);
     });
     document.getElementById("inventory-dialog-close").addEventListener("click", () => detailsDialog.close());
-    renderLogs();
+
+    window.addEventListener("storage", event => {
+        if (event.key === window.CLC_INVENTORY_LOGS.storageKey || event.key === null) {
+            refreshLogs();
+        }
+    });
+
+    refreshLogs();
 })();

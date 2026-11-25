@@ -10,7 +10,7 @@
     min-height: 100vh;
     min-height: 100svh;
     flex-direction: column;
-    overflow: hidden;
+    overflow: clip;
 }
 
 .account-navbar {

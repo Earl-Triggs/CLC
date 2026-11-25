@@ -117,6 +117,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.error-message').forEach(err => err.textContent = '');
   }
 
+  function recordSuccessfulLogin(email) {
+    const username = email.split('@')[0];
+    const entry = {
+      id: `LOGIN-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      username,
+      loginTime: new Date().toISOString()
+    };
+
+    try {
+      const savedEntries = JSON.parse(localStorage.getItem('clc-login-history-v1') || '[]');
+      if (!Array.isArray(savedEntries)) {
+        throw new TypeError('Saved login history must be an array.');
+      }
+      savedEntries.push(entry);
+      localStorage.setItem('clc-login-history-v1', JSON.stringify(savedEntries));
+    } catch (err) {
+      console.error('Could not record successful login.', err);
+    }
+  }
+
   // Clear error on input typing
   document.querySelectorAll('.form-input').forEach(input => {
     input.addEventListener('input', () => {
@@ -165,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Simulate authentication request
       await new Promise(resolve => setTimeout(resolve, 900));
 
+      recordSuccessfulLogin(email);
       showToast('Welcome back! You have successfully logged in.', 'success');
       showStatusAlert('Login successful. Redirecting to your CLC collection...', 'success');
 

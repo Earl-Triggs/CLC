@@ -1,9 +1,74 @@
-﻿(() => {
+﻿﻿(() => {
+    const conversionRate = 58;
+    const currencyFormatter = new Intl.NumberFormat("en-PH", {
+        style: "currency",
+        currency: "PHP",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+
+    window.CLC_CURRENCY = {
+        conversionRate,
+        freeShippingThreshold: 4350,
+        standardShippingFee: 493,
+        toPHP: value => Math.round(Number(value) * conversionRate * 100) / 100,
+        format: value => currencyFormatter.format(Number(value))
+    };
+
+    function migrateStoredCurrency(key, convert) {
+        const markerKey = `clc-currency-v${conversionRate}-${key}`;
+        try {
+            if (localStorage.getItem(markerKey) === "complete") return;
+            const storedValue = localStorage.getItem(key);
+            if (storedValue !== null) {
+                const records = JSON.parse(storedValue);
+                if (!Array.isArray(records)) {
+                    throw new TypeError(`Saved ${key} data must be an array.`);
+                }
+                localStorage.setItem(key, JSON.stringify(records.map(convert)));
+            }
+            localStorage.setItem(markerKey, "complete");
+        } catch (error) {
+            console.error(`Could not convert saved ${key} amounts to PHP.`, error);
+        }
+    }
+
+    const convertStoredAmount = value =>
+        Number.isFinite(value) ? window.CLC_CURRENCY.toPHP(value) : value;
+    migrateStoredCurrency("clc-cart-v1", item =>
+        item && typeof item === "object" ? { ...item, price: convertStoredAmount(item.price) } : item
+    );
+    migrateStoredCurrency("clc-admin-products-v1", product => {
+        if (!product || typeof product !== "object") return product;
+        const convertedProduct = { ...product, price: convertStoredAmount(product.price) };
+        if (Object.prototype.hasOwnProperty.call(product, "retailPrice")) {
+            convertedProduct.retailPrice = convertStoredAmount(product.retailPrice);
+        }
+        return convertedProduct;
+    });
+    migrateStoredCurrency("clc-orders-v1", order => {
+        if (!order || typeof order !== "object") return order;
+        const convertedOrder = { ...order };
+        ["subtotal", "shipping", "tax", "discount", "total"].forEach(key => {
+            if (Object.prototype.hasOwnProperty.call(order, key)) {
+                convertedOrder[key] = convertStoredAmount(order[key]);
+            }
+        });
+        if (Array.isArray(order.items)) {
+            convertedOrder.items = order.items.map(item =>
+                item && typeof item === "object"
+                    ? { ...item, price: convertStoredAmount(item.price) }
+                    : item
+            );
+        }
+        return convertedOrder;
+    });
+
     const defaultProducts = [
-        { name: "Helianthus de Soie", price: 20.15, category: "Women", image: "CLC images/Home and Kids/HP Bottom Image 1.png" },
-        { name: "Jasmine Noire", price: 16.49, category: "Women", image: "CLC images/Home and Kids/HP Bottom Image 2.png" },
-        { name: "Dahlia Eternelle", price: 18.98, category: "Men", image: "CLC images/Men/HP Bottom Image 6.png" },
-        { name: "6PAX", price: 17.23, category: "Men", image: "CLC images/Men/HP Bottom Image 7.png" }
+        { name: "Helianthus de Soie", price: 1168.70, category: "Women", image: "CLC images/Home and Kids/HP Bottom Image 1.png", description: "A luminous, elegant fragrance with a soft golden mood for mornings that deserve a little ceremony." },
+        { name: "Jasmine Noire", price: 956.42, category: "Women", image: "CLC images/Home and Kids/HP Bottom Image 2.png", description: "A graceful, mysterious fragrance with a poised evening mood and a softly dramatic finish." },
+        { name: "Dahlia Eternelle", price: 1100.84, category: "Men", image: "CLC images/Men/HP Bottom Image 6.png", description: "A refined, modern fragrance with a composed presence for evenings that call for quiet confidence." },
+        { name: "6PAX", price: 999.34, category: "Men", image: "CLC images/Men/HP Bottom Image 7.png", description: "A bold, energetic fragrance with an easy confidence that moves from daytime plans to a night out." }
     ];
 
     const products = window.CLC_PRODUCTS || defaultProducts;
@@ -28,11 +93,60 @@
     const accountButton = document.getElementById("account-btn");
     const accountMenu = document.getElementById("account-menu");
     const cartStorageKey = "clc-cart-v1";
+    const siteHeader = document.querySelector(".navbar");
+    const productDetailBackdrop = document.getElementById("product-detail-backdrop");
+    const productDetailDialog = document.getElementById("product-detail-dialog");
+    const productDetailCloseButton = document.getElementById("product-detail-close");
+    const productDetailImage = document.getElementById("product-detail-image");
+    const productDetailCategory = document.getElementById("product-detail-category");
+    const productDetailTitle = document.getElementById("product-detail-title");
+    const productDetailPrice = document.getElementById("product-detail-price");
+    const productDetailDescription = document.getElementById("product-detail-description");
+    const productDetailQuantity = document.getElementById("product-quantity");
+    const productDetailDecreaseButton = document.getElementById("product-quantity-decrease");
+    const productDetailIncreaseButton = document.getElementById("product-quantity-increase");
+    const productDetailAddButton = document.getElementById("product-detail-add");
+    const productDetailBuyButton = document.getElementById("product-detail-buy");
+    let activeProduct = null;
+    let activeProductTrigger = null;
+
+    if (siteHeader) {
+        let lastScrollY = window.scrollY;
+        let scrollFramePending = false;
+
+        const updateHeaderVisibility = () => {
+            const currentScrollY = window.scrollY;
+            const headerHasFocus = siteHeader.contains(document.activeElement);
+
+            if (currentScrollY <= siteHeader.offsetHeight || currentScrollY < lastScrollY || headerHasFocus) {
+                siteHeader.classList.remove("navbar-scroll-hidden");
+            } else if (currentScrollY > lastScrollY) {
+                siteHeader.classList.add("navbar-scroll-hidden");
+            }
+
+            lastScrollY = currentScrollY;
+            scrollFramePending = false;
+        };
+
+        window.addEventListener("scroll", () => {
+            if (scrollFramePending) return;
+            scrollFramePending = true;
+            window.requestAnimationFrame(updateHeaderVisibility);
+        }, { passive: true });
+
+        siteHeader.addEventListener("focusin", () => {
+            siteHeader.classList.remove("navbar-scroll-hidden");
+        });
+    }
 
     function escapeHtml(value) {
         const element = document.createElement("span");
         element.textContent = String(value ?? "");
-        return element.innerHTML;
+        return element.innerHTML.replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+
+    function formatCurrency(value) {
+        return window.CLC_CURRENCY.format(value);
     }
 
     function normalizeCartItem(item) {
@@ -99,17 +213,30 @@
             const grid = document.getElementById(section.targetId);
             if (!grid) return;
 
-            grid.innerHTML = section.products.map(product => `
+            grid.innerHTML = section.products.map(product => {
+                const price = Number(product.price);
+                const description = product.description ||
+                    `A fragrance from CLC's ${product.category || "signature"} collection.`;
+                return `
                 <article class="product-card" data-category="${escapeHtml(product.category || "")}">
-                    <img src="${escapeHtml(product.image || "")}" alt="${escapeHtml(product.imageAlt || `${product.name} perfume`)}" loading="lazy">
-                    <div class="product-info">
-                        <h3>${escapeHtml(product.name)}</h3>
-                        <p class="price">$${Number(product.price).toFixed(2)}</p>
-                        <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
-                        <button class="add-to-cart" data-name="${escapeHtml(product.name)}" data-price="${Number(product.price)}" data-image="${escapeHtml(product.image || "")}">🛒 ADD TO CART</button>
-                    </div>
+                    <button type="button" class="product-detail-trigger" aria-haspopup="dialog" aria-expanded="false"
+                        aria-label="View details for ${escapeHtml(product.name)}"
+                        data-name="${escapeHtml(product.name)}"
+                        data-price="${price}"
+                        data-image="${escapeHtml(product.image || "")}"
+                        data-category="${escapeHtml(product.category || "")}"
+                        data-description="${escapeHtml(description)}">
+                        <img src="${escapeHtml(product.image || "")}" alt="${escapeHtml(product.imageAlt || `${product.name} perfume`)}" loading="lazy">
+                        <div class="product-info">
+                            <h3>${escapeHtml(product.name)}</h3>
+                            <p class="price">${formatCurrency(price)}</p>
+                            <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+                        </div>
+                    </button>
+                    <button class="add-to-cart" data-name="${escapeHtml(product.name)}" data-price="${price}" data-image="${escapeHtml(product.image || "")}">🛒 ADD TO CART</button>
                 </article>
-            `).join("");
+            `;
+            }).join("");
         });
     }
 
@@ -120,15 +247,19 @@
         if (cartItemCount) cartItemCount.textContent = `(${totalQuantity})`;
 
         const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        const shipping = cart.length === 0 ? 0 : subtotal >= 75 ? 0 : 8.50;
+        const shipping = cart.length === 0
+            ? 0
+            : subtotal >= window.CLC_CURRENCY.freeShippingThreshold
+                ? 0
+                : window.CLC_CURRENCY.standardShippingFee;
         const tax = subtotal * 0.08;
         const total = subtotal + shipping + tax;
 
-        if (cartSubtotal) cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
-        if (cartItemsTotal) cartItemsTotal.textContent = `$${subtotal.toFixed(2)}`;
-        if (cartShipping) cartShipping.textContent = `$${shipping.toFixed(2)}`;
-        if (cartTax) cartTax.textContent = `$${tax.toFixed(2)}`;
-        if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
+        if (cartSubtotal) cartSubtotal.textContent = formatCurrency(subtotal);
+        if (cartItemsTotal) cartItemsTotal.textContent = formatCurrency(subtotal);
+        if (cartShipping) cartShipping.textContent = formatCurrency(shipping);
+        if (cartTax) cartTax.textContent = formatCurrency(tax);
+        if (cartTotal) cartTotal.textContent = formatCurrency(total);
 
         try {
             localStorage.setItem(cartStorageKey, JSON.stringify(cart));
@@ -149,7 +280,7 @@
                     <img class="cart-item-image" src="${escapeHtml(item.image || "CLC images/Home and Kids/HP Bottom Image 1.png")}" alt="${escapeHtml(item.name)} perfume" loading="lazy">
                     <div class="cart-item-details">
                         <p class="cart-item-name">${escapeHtml(item.name)}</p>
-                        <p class="cart-item-price">$${item.price.toFixed(2)} each</p>
+                        <p class="cart-item-price">${formatCurrency(item.price)} each</p>
                     </div>
                 </div>
                 <div class="cart-item-actions">
@@ -164,14 +295,69 @@
         `).join("");
     }
 
-    function addItemToCart(name, price, image) {
+    function addItemToCart(name, price, image, quantity = 1) {
+        const quantityToAdd = Number.isInteger(quantity) && quantity > 0 ? quantity : 1;
         const existingItem = cart.find(item => item.name === name);
         if (existingItem) {
-            existingItem.quantity += 1;
+            existingItem.quantity += quantityToAdd;
         } else {
-            cart.push({ name, price, image, quantity: 1 });
+            cart.push({ name, price, image, quantity: quantityToAdd });
         }
         renderCart();
+    }
+
+    function setProductDetailOpen(isOpen) {
+        if (!productDetailBackdrop || !productDetailDialog) return;
+        productDetailBackdrop.hidden = !isOpen;
+        productDetailDialog.setAttribute("aria-hidden", String(!isOpen));
+        document.body.classList.toggle("product-detail-open", isOpen);
+
+        if (isOpen) {
+            productDetailCloseButton?.focus();
+        } else {
+            activeProductTrigger?.setAttribute("aria-expanded", "false");
+            activeProductTrigger?.focus();
+            activeProductTrigger = null;
+            activeProduct = null;
+        }
+    }
+
+    function openProductDetails(trigger) {
+        if (!productDetailBackdrop || !productDetailDialog ||
+            !productDetailImage || !productDetailTitle || !productDetailPrice ||
+            !productDetailDescription || !productDetailQuantity) {
+            return;
+        }
+
+        const name = trigger.dataset.name;
+        const price = Number(trigger.dataset.price);
+        if (!name || !Number.isFinite(price) || price < 0) {
+            console.error("Product detail button requires a name and non-negative price.");
+            return;
+        }
+
+        const category = trigger.dataset.category || "Fragrance";
+        const image = trigger.dataset.image || "";
+        activeProduct = {
+            name,
+            price,
+            image,
+            quantity: 1
+        };
+        activeProductTrigger = trigger;
+        trigger.setAttribute("aria-expanded", "true");
+
+        productDetailImage.src = image;
+        productDetailImage.alt = `${name} perfume`;
+        if (productDetailCategory) {
+            productDetailCategory.textContent = `${category} collection`;
+        }
+        productDetailTitle.textContent = name;
+        productDetailPrice.textContent = formatCurrency(price);
+        productDetailDescription.textContent = trigger.dataset.description ||
+            `A fragrance from CLC's ${category} collection.`;
+        productDetailQuantity.textContent = "1";
+        setProductDetailOpen(true);
     }
 
     function filterProducts() {
@@ -238,6 +424,12 @@
 
             addItemToCart(name, price, image);
             showAddButtonState(addButton);
+            return;
+        }
+
+        const detailTrigger = event.target.closest(".product-detail-trigger");
+        if (detailTrigger) {
+            openProductDetails(detailTrigger);
             return;
         }
 
@@ -339,6 +531,37 @@
         cartBackdrop.addEventListener("click", () => setCartOpen(false));
     }
 
+    productDetailCloseButton?.addEventListener("click", () => setProductDetailOpen(false));
+    productDetailBackdrop?.addEventListener("click", event => {
+        if (event.target === productDetailBackdrop) {
+            setProductDetailOpen(false);
+        }
+    });
+
+    productDetailDecreaseButton?.addEventListener("click", () => {
+        if (!activeProduct || !productDetailQuantity) return;
+        activeProduct.quantity = Math.max(1, activeProduct.quantity - 1);
+        productDetailQuantity.textContent = String(activeProduct.quantity);
+    });
+
+    productDetailIncreaseButton?.addEventListener("click", () => {
+        if (!activeProduct || !productDetailQuantity) return;
+        activeProduct.quantity += 1;
+        productDetailQuantity.textContent = String(activeProduct.quantity);
+    });
+
+    productDetailAddButton?.addEventListener("click", () => {
+        if (!activeProduct) return;
+        addItemToCart(activeProduct.name, activeProduct.price, activeProduct.image, activeProduct.quantity);
+        setProductDetailOpen(false);
+    });
+
+    productDetailBuyButton?.addEventListener("click", () => {
+        if (!activeProduct) return;
+        addItemToCart(activeProduct.name, activeProduct.price, activeProduct.image, activeProduct.quantity);
+        window.location.href = "checkout.html";
+    });
+
     const cartCheckoutButton = document.getElementById("cart-checkout-btn");
     if (cartCheckoutButton) {
         cartCheckoutButton.addEventListener("click", () => {
@@ -346,6 +569,23 @@
             window.location.href = "checkout.html";
         });
     }
+
+    document.addEventListener("click", event => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const logoutControl = target.closest('[data-action="logout"]');
+        if (!logoutControl) return;
+
+        event.preventDefault();
+        try {
+            localStorage.removeItem("clc_remembered_email");
+        } catch (error) {
+            console.error("Could not clear the remembered email during logout.", error);
+        } finally {
+            window.location.href = "Login.html";
+        }
+    });
 
     if (accountButton && accountMenu) {
         accountButton.addEventListener("click", () => {
@@ -360,12 +600,7 @@
             const menuItem = event.target.closest('[role="menuitem"]');
             if (!menuItem) return;
 
-            const action = menuItem.dataset.action;
-            if (action === "logout") {
-                localStorage.removeItem("clc_remembered_email");
-                window.location.href = "Login.html";
-                return;
-            }
+            if (menuItem.dataset.action === "logout") return;
 
             setAccountMenuOpen(false);
             accountButton.focus();
@@ -400,6 +635,33 @@
     }
 
     document.addEventListener("keydown", event => {
+        if (productDetailBackdrop && !productDetailBackdrop.hidden) {
+            if (event.key === "Escape") {
+                setProductDetailOpen(false);
+                return;
+            }
+
+            if (event.key === "Tab" && productDetailDialog) {
+                const focusableElements = [...productDetailDialog.querySelectorAll(
+                    'button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+                )];
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+
+                if (!firstElement || !lastElement) {
+                    event.preventDefault();
+                    productDetailDialog.focus();
+                } else if (event.shiftKey && document.activeElement === firstElement) {
+                    event.preventDefault();
+                    lastElement.focus();
+                } else if (!event.shiftKey && document.activeElement === lastElement) {
+                    event.preventDefault();
+                    firstElement.focus();
+                }
+                return;
+            }
+        }
+
         if (event.key !== "Escape") return;
 
         if (accountMenu && !accountMenu.hidden && accountButton && !accountMenu.contains(event.target)) {

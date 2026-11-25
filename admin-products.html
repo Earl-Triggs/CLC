@@ -18,7 +18,7 @@
 <body class="dashboard-page product-admin-page">
     <div class="dashboard-shell">
         <aside class="dashboard-sidebar">
-            <a href="index.html" class="dashboard-logo" aria-label="CLC home">CLC</a>
+            <a href="index.html" class="dashboard-logo" aria-label="CLC home"><img src="assets/logo-circle.png" alt=""></a>
             <nav class="dashboard-navigation" aria-label="Dashboard navigation">
                 <p class="sidebar-label">Menu</p>
                 <a href="dashboard.html" class="sidebar-link">Dashboard</a>
@@ -64,10 +64,10 @@
                     <label>
                         <span>Category:</span>
                         <select id="category-filter">
-                            <option value="all">All</option>
+                            <option value="all" selected>All</option>
                             <option value="Kids">Kids</option>
                             <option value="Men">Men</option>
-                            <option value="Women" selected>Women</option>
+                            <option value="Women">Women</option>
                             <option value="Unisex">Unisex</option>
                         </select>
                     </label>
@@ -101,8 +101,8 @@
                 <button type="button" class="editor-close" id="editor-close" aria-label="Close">&times;</button>
             </div>
             <label>Product name<input name="name" required maxlength="80"></label>
-            <label>Price<input name="price" type="number" min="0" step="0.01" required></label>
-            <label>Retail selling price<input name="retailPrice" type="number" min="0" step="0.01" required></label>
+            <label>Price (PHP)<input name="price" type="number" min="0" step="0.01" required></label>
+            <label>Retail selling price (PHP)<input name="retailPrice" type="number" min="0" step="0.01" required></label>
             <label>Category
                 <select name="category" required>
                     <option>Kids</option><option>Men</option><option>Women</option><option>Unisex</option>
@@ -120,6 +120,8 @@
 
     <script src="script.js"></script>
     <script src="admin-inventory-data.js"></script>
+    <script src="kids-products.js"></script>
+    <script src="category-products.js"></script>
     <script src="admin-product-data.js"></script>
     <script src="admin-products.js"></script>
 </body>

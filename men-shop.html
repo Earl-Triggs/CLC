@@ -108,15 +108,50 @@
         <div class="cart-items" id="cart-items" aria-live="polite"></div>
         <div class="cart-drawer-footer">
             <div class="cart-breakdown" aria-label="Cart breakdown">
-                <div class="cart-line"><span>Items</span><strong id="cart-items-total">$0.00</strong></div>
-                <div class="cart-line"><span>Shipping</span><strong id="cart-shipping">$0.00</strong></div>
-                <div class="cart-line"><span>Estimated tax</span><strong id="cart-tax">$0.00</strong></div>
-                <div class="cart-line cart-total"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+                <div class="cart-line"><span>Items</span><strong id="cart-items-total">&#8369;0.00</strong></div>
+                <div class="cart-line"><span>Shipping</span><strong id="cart-shipping">&#8369;0.00</strong></div>
+                <div class="cart-line"><span>Estimated tax</span><strong id="cart-tax">&#8369;0.00</strong></div>
+                <div class="cart-line cart-total"><span>Total</span><strong id="cart-total">&#8369;0.00</strong></div>
             </div>
-            <div class="cart-subtotal"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+            <div class="cart-subtotal"><span>Subtotal</span><strong id="cart-subtotal">&#8369;0.00</strong></div>
             <button type="button" class="cart-checkout-btn" id="cart-checkout-btn">CHECK OUT</button>
         </div>
     </aside>
+
+    <div class="product-detail-backdrop" id="product-detail-backdrop" hidden>
+        <section class="product-detail-dialog" id="product-detail-dialog" role="dialog" aria-modal="true"
+            aria-labelledby="product-detail-title" aria-describedby="product-detail-description" tabindex="-1">
+            <button type="button" class="product-detail-close" id="product-detail-close"
+                aria-label="Close product details">&times;</button>
+            <div class="product-detail-image-wrap">
+                <img id="product-detail-image" src="" alt="">
+            </div>
+            <div class="product-detail-content">
+                <div>
+                    <p class="product-detail-category" id="product-detail-category"></p>
+                    <h2 id="product-detail-title"></h2>
+                    <p class="product-detail-price" id="product-detail-price"></p>
+                    <p class="product-detail-stars" aria-label="5 out of 5 stars">★★★★★</p>
+                    <p class="product-detail-description" id="product-detail-description"></p>
+                </div>
+                <div class="product-detail-actions">
+                    <div class="product-detail-quantity">
+                        <span>Quantity</span>
+                        <div>
+                            <button type="button" id="product-quantity-decrease" aria-label="Decrease quantity">−</button>
+                            <output id="product-quantity" aria-live="polite">1</output>
+                            <button type="button" id="product-quantity-increase" aria-label="Increase quantity">+</button>
+                        </div>
+                    </div>
+                    <div class="product-detail-buttons">
+                        <button type="button" class="product-detail-add" id="product-detail-add">🛒 Add to cart</button>
+                        <button type="button" class="product-detail-buy" id="product-detail-buy">Buy now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <script src="category-products.js"></script>
     <script src="script.js"></script>
 </body>

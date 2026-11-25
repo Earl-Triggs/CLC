@@ -18,7 +18,7 @@
 <body class="dashboard-page product-admin-page add-product-page">
     <div class="dashboard-shell">
         <aside class="dashboard-sidebar">
-            <a href="index.html" class="dashboard-logo" aria-label="CLC home">CLC</a>
+            <a href="index.html" class="dashboard-logo" aria-label="CLC home"><img src="assets/logo-circle.png" alt=""></a>
             <nav class="dashboard-navigation" aria-label="Dashboard navigation">
                 <p class="sidebar-label">Menu</p>
                 <a href="dashboard.html" class="sidebar-link">Dashboard</a>
@@ -85,8 +85,8 @@
                     <section class="add-product-section pricing-stock">
                         <h2>Pricing and Stock</h2>
                         <div class="add-product-fields">
-                            <label>Price<input name="price" type="number" min="0" step="0.01" required></label>
-                            <label>Retail Selling Price<input name="retailPrice" type="number" min="0" step="0.01" required></label>
+                            <label>Price (PHP)<input name="price" type="number" min="0" step="0.01" required></label>
+                            <label>Retail Selling Price (PHP)<input name="retailPrice" type="number" min="0" step="0.01" required></label>
                             <label>Initial Stock Quantity<input name="stock" type="number" min="0" step="1" required></label>
                         </div>
                     </section>
@@ -108,6 +108,8 @@
     </div>
     <script src="script.js"></script>
     <script src="admin-inventory-data.js"></script>
+    <script src="kids-products.js"></script>
+    <script src="category-products.js"></script>
     <script src="admin-product-data.js"></script>
     <script src="admin-add-product.js"></script>
 </body>
