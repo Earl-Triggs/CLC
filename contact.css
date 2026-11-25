@@ -1,19 +1,22 @@
 .contact-main {
-    padding-top: 24px;
+    min-height: calc(100vh - 117px);
+    min-height: calc(100svh - 117px);
+    padding: clamp(12px, 2vh, 24px) 0;
+    box-sizing: border-box;
 }
 
 .contact-hero {
     display: grid;
-    grid-template-columns: 1fr 0.9fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
     align-items: center;
-    min-height: min(68vh, 516px);
-    padding: 54px clamp(36px, 9.5vw, 142px);
+    min-height: max(420px, calc(100svh - 165px));
+    padding: clamp(28px, 6vh, 54px) clamp(24px, 9.5vw, 142px);
     background: #a780ac;
     color: #fff;
 }
 
 .contact-copy {
-    max-width: 610px;
+    width: min(100%, 610px);
 }
 
 .contact-eyebrow,
@@ -74,7 +77,7 @@
 }
 
 .contact-illustration {
-    width: min(100%, 480px);
+    width: min(100%, clamp(300px, 35vw, 480px));
     aspect-ratio: 24 / 19;
     justify-self: center;
     /* Add contact-image.png beside contact.html, then enable:
@@ -82,21 +85,26 @@
 }
 
 .contact-page footer {
-    margin-top: 66px;
-    padding: 26px 14px;
+    min-height: 49px;
+    display: grid;
+    place-items: center;
+    margin-top: 0;
+    padding: 14px;
     font-size: 14px;
 }
 
 @media (max-width: 700px) {
     .contact-main {
-        padding-top: 16px;
+        min-height: calc(100vh - 117px);
+        min-height: calc(100svh - 117px);
+        padding: 16px 0;
     }
 
     .contact-hero {
         grid-template-columns: 1fr;
         gap: 28px;
-        min-height: 0;
-        padding: 42px 8vw;
+        min-height: calc(100svh - 149px);
+        padding: 36px 8vw;
     }
 
     .contact-copy {
@@ -112,6 +120,6 @@
     }
 
     .contact-page footer {
-        margin-top: 40px;
+        margin-top: 0;
     }
 }

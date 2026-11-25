@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | CLC Perfume Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="checkout.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="checkout-page">
+    <div class="site-container">
+        <header class="navbar">
+            <a href="index.html" class="logo" aria-label="CLC home"><img src="assets/logo-circle.png" alt="CLC logo"></a>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="kids-shop.html">Shop</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search perfumes..." aria-label="Search perfumes">
+                <button id="search-btn" aria-label="Open search" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7.3"></circle><path d="m16.2 16.2 5 5"></path></svg>
+                </button>
+            </div>
+            <div class="nav-icons">
+                <button id="cart-btn" aria-label="Shopping cart" aria-haspopup="dialog" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="18" r="1.7"></circle><circle cx="17" cy="18" r="1.7"></circle><path d="M3 4h2l2.2 10.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 .98-.8L20 7H7"></path></svg>
+                    <span id="cart-count">0</span>
+                </button>
+                <div class="account-menu-wrapper">
+                    <button type="button" id="account-btn" aria-label="Account menu" aria-haspopup="true" aria-expanded="false" aria-controls="account-menu">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path></svg>
+                    </button>
+                    <div class="account-menu" id="account-menu" role="menu" aria-label="Account options" hidden>
+                        <p class="account-menu-heading" role="presentation">YOUR ACCOUNT</p>
+                        <a href="account.html" role="menuitem">Account</a>
+                        <a href="settings.html" role="menuitem">Settings</a>
+                        <a href="help.html" role="menuitem">Help</a>
+                        <hr role="separator">
+                        <button type="button" role="menuitem" data-action="logout">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="checkout-main">
+            <form id="checkout-form" class="checkout-layout" novalidate>
+                <section class="delivery-panel" aria-labelledby="delivery-title">
+                    <h1 id="delivery-title">Delivery Information</h1>
+                    <div class="delivery-grid">
+                        <label>First Name<input type="text" name="firstName" required autocomplete="given-name"></label>
+                        <label>Floor/Unit Number<input type="text" name="unit" autocomplete="address-line2"></label>
+                        <label>Last Name<input type="text" name="lastName" required autocomplete="family-name"></label>
+                        <label>Province
+                            <select name="province" required>
+                                <option value="">Select province</option>
+                                <option>Cavite</option><option>Laguna</option><option>Batangas</option><option>Metro Manila</option>
+                            </select>
+                        </label>
+                        <label>Other Notes (Optional)<input type="text" name="notes"></label>
+                        <label>District
+                            <select name="district" required>
+                                <option value="">Select district</option>
+                                <option>District I</option><option>District II</option><option>District III</option><option>District IV</option>
+                            </select>
+                        </label>
+                        <div></div>
+                        <label>Street<input type="text" name="street" required autocomplete="street-address"></label>
+                    </div>
+                </section>
+
+                <aside class="payment-panel" aria-labelledby="payment-title">
+                    <h2 id="payment-title">Payment Information</h2>
+                    <fieldset class="payment-methods">
+                        <legend class="sr-only">Payment method</legend>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="Cash on Delivery" checked>
+                            <span class="payment-icon">COD</span><span>Cash On Delivery</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="Card / E-Wallet">
+                            <span class="payment-icon card-icon">VISA</span><span>Card / E-Wallet</span>
+                        </label>
+                    </fieldset>
+                    <div class="voucher-row">
+                        <label for="voucher">Voucher</label>
+                        <div><input type="text" id="voucher" name="voucher"><button type="button" id="apply-voucher">Apply</button></div>
+                    </div>
+                    <div class="checkout-summary" aria-label="Order total">
+                        <h3>Payment Information</h3>
+                        <div class="summary-line"><span>Subtotal:</span><strong id="checkout-subtotal">$0.00</strong></div>
+                        <div class="summary-line"><span>Shipping Fee:</span><strong id="checkout-shipping">$0.00</strong></div>
+                        <div class="summary-line discount-line" id="discount-row" hidden><span>Discount:</span><strong id="checkout-discount">-$0.00</strong></div>
+                        <div class="summary-line"><span>Tax:</span><strong id="checkout-tax">$0.00</strong></div>
+                        <div class="summary-line total-line"><span>Total:</span><strong id="checkout-total">$0.00</strong></div>
+                    </div>
+                    <p class="checkout-error" id="checkout-error" role="alert"></p>
+                    <button type="submit" class="place-order-btn">Place Order Now</button>
+                </aside>
+            </form>
+        </main>
+
+        <footer><p>© 2026 CLC. All Rights Reserved.</p></footer>
+    </div>
+
+    <div class="order-success-backdrop" id="order-success-backdrop" hidden>
+        <section class="order-success" role="dialog" aria-modal="true" aria-labelledby="order-success-title">
+            <div class="success-check">✓</div>
+            <h2 id="order-success-title">Order placed!</h2>
+            <p id="order-success-message"></p>
+            <a href="index.html">Continue Shopping</a>
+        </section>
+    </div>
+    <script src="script.js"></script>
+    <script src="checkout.js"></script>
+</body>
+</html>

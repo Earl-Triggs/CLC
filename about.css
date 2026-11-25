@@ -1,0 +1,77 @@
+.about-main {
+    min-height: calc(100vh - 117px);
+    min-height: calc(100svh - 117px);
+}
+
+.about-hero {
+    min-height: max(460px, calc(100svh - 117px));
+    display: grid;
+    place-items: center;
+    padding: clamp(16px, 3vh, 32px) clamp(16px, 3vw, 32px);
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06)),
+        url("assets/blossoms-bg.jpg") center 42% / cover no-repeat;
+}
+
+.about-card {
+    width: min(750px, 90vw);
+    min-height: 0;
+    padding: clamp(24px, 4vw, 50px);
+    border-radius: 18px;
+    background: rgba(91, 91, 91, 0.68);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(55, 25, 47, 0.14);
+    backdrop-filter: blur(1.5px);
+}
+
+.about-card h1 {
+    margin: 0 0 clamp(20px, 3vh, 30px);
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(32px, 3.2vw, 44px);
+    line-height: 1.15;
+}
+
+.about-card p {
+    margin: 0 0 clamp(14px, 2vh, 20px);
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(16px, 1.6vw, 22px);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.about-card .about-signoff {
+    margin-top: 24px;
+    margin-bottom: 0;
+}
+
+.about-page footer {
+    min-height: 42px;
+    display: grid;
+    place-items: center;
+    padding: 14px;
+    font-size: 14px;
+}
+
+@media (max-width: 800px) {
+    .about-hero {
+        min-height: max(520px, calc(100svh - 117px));
+        padding: 24px 16px;
+    }
+
+    .about-card {
+        width: min(680px, 100%);
+        min-height: 0;
+        padding: clamp(24px, 5vw, 36px);
+    }
+
+    .about-card h1 {
+        margin-bottom: 24px;
+        font-size: clamp(32px, 6vw, 40px);
+    }
+
+    .about-card p {
+        font-size: clamp(16px, 2.3vw, 18px);
+        line-height: 1.4;
+    }
+}

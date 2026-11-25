@@ -479,6 +479,23 @@ a {
     font-size: 12px;
 }
 
+.cart-checkout-btn {
+    width: 100%;
+    margin-top: 14px;
+    padding: 13px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: #a780ac;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.cart-checkout-btn:hover {
+    background: #95709b;
+}
+
 body.cart-open {
     overflow: hidden;
 }
@@ -1099,52 +1116,7 @@ footer {
         min-height: 200px;
     }
 
-<<<<<<< HEAD
     .best-sellers .product-grid {
-=======
-<<<<<<< Updated upstream
-    .product-grid {
-=======
-    .product-detail-backdrop {
-        padding: 12px;
-    }
-
-    .product-detail-dialog {
-        grid-template-columns: 1fr;
-        gap: 18px;
-        min-height: 0;
-        max-height: calc(100vh - 24px);
-        padding: 18px;
-    }
-
-    .product-detail-image-wrap {
-        width: min(100%, 260px);
-        justify-self: center;
-    }
-
-    .product-detail-content {
-        gap: 22px;
-        padding: 0;
-    }
-
-    .product-detail-description {
-        font-size: 14px;
-    }
-
-    .product-detail-actions {
-        align-items: stretch;
-        flex-direction: column;
-        gap: 18px;
-    }
-
-    .product-detail-buttons {
-        width: 100%;
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .best-sellers .product-grid {
->>>>>>> Stashed changes
->>>>>>> origin/chen
         grid-template-columns: repeat(2, minmax(0, 1fr));
         column-gap: 14px;
         row-gap: 24px;

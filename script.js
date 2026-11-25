@@ -339,6 +339,14 @@
         cartBackdrop.addEventListener("click", () => setCartOpen(false));
     }
 
+    const cartCheckoutButton = document.getElementById("cart-checkout-btn");
+    if (cartCheckoutButton) {
+        cartCheckoutButton.addEventListener("click", () => {
+            if (cart.length === 0) return;
+            window.location.href = "checkout.html";
+        });
+    }
+
     if (accountButton && accountMenu) {
         accountButton.addEventListener("click", () => {
             const willOpen = accountMenu.hidden;
